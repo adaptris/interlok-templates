@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adapter tmpl-desc="ActiveMQQueueTransfer&lt;br/&gt;Transfer from one queue to another queue" tmpl-name="ActiveMQQueueTransfer" tmpl-type="adapter" tmpl-wizard="true"
+  wizard-connection-order="0" wizard-connection-desc="ActiveMQ Connection details"
+  wizard-consume-order="1" wizard-consume-desc="Source Queue to transfer the message from"
+  wizard-produce-order="2" wizard-produce-desc="Destination Queue to transfer the message to">
+  <unique-id>ActiveMQQueueTransfer</unique-id>
+  <shared-components>
+    <connections>
+      <jms-connection>
+        <unique-id>jms-connection</unique-id>
+        <connection-attempts>2</connection-attempts>
+        <connection-retry-interval>
+          <unit>SECONDS</unit>
+          <interval>5</interval>
+        </connection-retry-interval>
+        <additional-debug>true</additional-debug>
+        <vendor-implementation class="basic-active-mq-implementation">
+          <broker-url wizard-key="brokerUrl" wizard-label="Broker Url" wizard-desc="Active MQ Broker URL (usually tcp://localhost:61616)" wizard-type="String" wizard-step="connection">tcp://localhost:61616</broker-url>
+        </vendor-implementation>
+        <user-name wizard-key="userName" wizard-desc="The username to connect to the broker" wizard-step="connection"></user-name>
+        <password wizard-key="password" wizard-desc="The password to connect to the broker" wizard-step="connection" wizard-type="Password"></password>
+      </jms-connection>    
+    </connections>
+  </shared-components>
+  <message-error-handler class="standard-processing-exception-handler">
+    <processing-exception-service class="service-list">
+      <services>
+        <standalone-producer>
+          <producer class="fs-producer">
+            <encoder class="mime-encoder"/>
+            <destination class="configured-produce-destination">
+              <destination>./messages/bad</destination>
+            </destination>
+            <create-dirs>true</create-dirs>
+          </producer>
+        </standalone-producer>
+      </services>
+    </processing-exception-service>
+  </message-error-handler>
+  <failed-message-retrier class="default-failed-message-retrier">
+    <standalone-consumer>
+      <consumer class="fs-consumer">
+        <encoder class="mime-encoder">
+          <retain-unique-id>true</retain-unique-id>
+        </encoder>
+        <destination class="configured-consume-destination">
+          <configured-thread-name>MESSAGE_RETRY</configured-thread-name>
+          <destination>./messages/retry</destination>
+        </destination>
+        <poller class="quartz-cron-poller">
+          <cron-expression>0 */2 * * * ?</cron-expression>
+        </poller>
+        <create-dirs>true</create-dirs>
+      </consumer>
+    </standalone-consumer>
+  </failed-message-retrier>
+  <channel-list>
+    <channel>
+      <consume-connection class="shared-connection">
+        <lookup-name>jms-connection</lookup-name>
+      </consume-connection>
+      <produce-connection class="shared-connection">
+        <lookup-name>jms-connection</lookup-name>
+      </produce-connection>
+      <unique-id>ActiveMqChannel</unique-id>
+      <workflow-list>
+        <standard-workflow>
+          <unique-id>JmsWorkflow</unique-id>        
+          <consumer class="jms-queue-consumer">
+            <unique-id>JmsQueueConsumer</unique-id>
+            <destination class="configured-consume-destination">
+              <destination wizard-key="consumeQ" wizard-label="JMS Consume Queue" wizard-desc="Active MQ JMS Consume Queue" wizard-type="String" wizard-step="consume"></destination>
+            </destination>
+            <acknowledge-mode>CLIENT_ACKNOWLEDGE</acknowledge-mode>
+            <message-translator class="auto-convert-message-translator"/>
+          </consumer>
+          <service-collection class="service-list">
+            <services>
+              <add-metadata-service>
+                <unique-id>AddTransferredFromMetadata</unique-id>
+               <metadata-element>
+                <key>TRANSFERRED_FROM</key>
+                <value wizard-key="consumeQ" wizard-step="consume"></value>
+               </metadata-element>
+              </add-metadata-service>
+            </services>
+          </service-collection>
+          <producer class="jms-queue-producer">
+            <destination class="configured-produce-destination">
+              <destination wizard-key="produceQ" wizard-label="Jms Produce Queue" wizard-desc="Active MQ Jms Produce Queue" wizard-type="String" wizard-step="produce"></destination>
+            </destination>
+            <acknowledge-mode>CLIENT_ACKNOWLEDGE</acknowledge-mode>
+            <message-translator class="text-message-translator"/>
+            <delivery-mode>PERSISTENT</delivery-mode>
+          </producer>
+          <message-metrics-interceptor>
+            <unique-id>JmsWorkflowStatistics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>1</interval>
+            </timeslice-duration>
+            <timeslice-history-count>100</timeslice-history-count>
+          </message-metrics-interceptor>
+        </standard-workflow>
+      </workflow-list>
+    </channel>
+  </channel-list>
+  <message-error-digester class="standard-message-error-digester">
+    <digest-max-size>100</digest-max-size>
+    <unique-id>ErrorDigest</unique-id>
+  </message-error-digester>
+</adapter>

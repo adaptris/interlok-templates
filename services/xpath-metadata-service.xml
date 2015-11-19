@@ -1,0 +1,11 @@
+<xpath-metadata-service tmpl-desc="Extract Xpath and store as metadata" tmpl-name="Extract Xpath to Metadata"
+                      tmpl-type="service" tmpl-wizard="true"
+                      wizard-xpath-order="0" wizard-xpath-desc="Configure the Xpath"
+>
+
+   <xpath-query class="configured-xpath-query">
+    <metadata-key wizard-key="MetadataKey" wizard-desc="The Metadata Key" wizard-step="xpath"></metadata-key>
+    <xpath-query wizard-key="xpath" wizard-desc="The Xpath" wizard-step="xpath"></xpath-query>
+   </xpath-query>
+
+</xpath-metadata-service>

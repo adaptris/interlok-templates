@@ -1,0 +1,11 @@
+<edi-xml-stream-service tmpl-desc="EDI to XML Transform Service&lt;br/&gt;Requires optional/edi" tmpl-name="Transform X12 EDI to XML"  tmpl-type="service" tmpl-wizard="true"
+ wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
+>
+ <edi-separator-set class="edi-x12-separators"/>
+ <xml-tagnames class="edi-legacy-xml-tag-names"/>
+ <input-charset>US-ASCII</input-charset>
+ <output-charset>UTF-8</output-charset>
+ <auto-detect-msg-details>true</auto-detect-msg-details>
+ <trim-white-space-from-data>false</trim-white-space-from-data>
+ <xml-definition-url wizard-key="EDI Definition File" wizard-desc="The GXML definition File" wizard-step="transform"></xml-definition-url>
+</edi-xml-stream-service>

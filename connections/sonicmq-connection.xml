@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms-connection tmpl-desc="A Basic SonicMQ JMS Connection&lt;br/&gt;Requires optional/jms-sonicmq" tmpl-name="A Basic SonicMQ Connection"  tmpl-type="connection" tmpl-wizard="true"
+ wizard-init-order="0" wizard-init-desc="Configure the connection unique-id"
+ wizard-brokerConnection-order="1" wizard-brokerConnection-desc="Configure the broker Connection"
+ wizard-brokerCredentials-order="2" wizard-brokerCredentials-desc="Configure the broker Credentials"
+>
+  <unique-id wizard-key="Unique ID" wizard-desc="The Unique ID for this connection (mandatory if using as a shared-connection)" wizard-step="init"></unique-id>
+  <connection-error-handler class="jms-connection-error-handler"/>
+  <vendor-implementation class="basic-sonic-mq-implementation">
+    <broker-url wizard-key="Broker URL" wizard-desc="Where is the SonicMQ Broker" wizard-step="brokerConnection">tcp://localhost:2506</broker-url>
+    <connection-urls wizard-label="Other Broker URLs" wizard-key="other-brokers" wizard-desc="Backup Broker URLS for CAA / Clustering" wizard-step="brokerConnection"></connection-urls>
+    <connect-id wizard-key="Connect ID" wizard-desc="Connect ID for this connection" wizard-step="brokerConnection"></connect-id>
+  </vendor-implementation>
+  <user-name wizard-key="Username" wizard-desc="Where is the ActiveMQ Broker" wizard-step="brokerCredentials"></user-name>
+  <password wizard-key="Users Password" wizard-desc="Where is the ActiveMQ Broker" wizard-step="brokerCredentials" wizard-type="Password" ></password>
+  <client-id wizard-key="JMS Client ID" wizard-desc="The Client ID used to connect to the broker" wizard-step="brokerConnection"></client-id>
+</jms-connection>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel tmpl-desc="Pickup from Filesystem and send to JMS" tmpl-name="Filesystem To JMS (Topic)"  tmpl-type="channel" tmpl-wizard="true"
+         wizard-filesystem-order="0" wizard-filesystem-desc="Configure the pickup"
+         wizard-jms-order="1" wizard-jms-desc="Configure the JMS Producer"
+>
+  <consume-connection class="null-connection"/>
+  <produce-connection class="shared-connection">
+    <lookup-name wizard-key="JmsSharedConnection"
+                 wizard-label="JMS Connection ID"
+                 wizard-desc="The ID of the JMS connection in the shared connections list"
+                 wizard-step="jms">hub-jms-connection</lookup-name>
+  </produce-connection>
+  <workflow-list>
+    <standard-workflow>
+      <consumer class="fs-consumer">
+        <destination class="configured-consume-destination">
+          <destination wizard-key="pickupLocation"
+                       wizard-desc="Location where to pick up the file"
+                       wizard-step="filesystem"></destination>
+        </destination>
+        <poller class="fixed-interval-poller">
+          <poll-interval>
+            <unit>SECONDS</unit>
+            <interval wizard-key="pickupInterval"
+                      wizard-label="Seconds between each poll"
+                      wizard-desc="The number of seconds between each poll"
+                      wizard-step="filesystem">20</interval>
+          </poll-interval>
+        </poller>
+        <create-dirs>true</create-dirs>
+      </consumer>
+      <service-collection class="service-list">
+        <services>
+        </services>
+      </service-collection>
+      <producer class="jms-topic-producer">
+        <destination class="configured-produce-destination">
+           <destination wizard-key="JMSTOpic"
+                        wizard-label="JMS Topic"
+                        wizard-desc="The JMS Topic"
+                        wizard-step="jms">
+           </destination>
+        </destination>
+        <delivery-mode>PERSISTENT</delivery-mode>
+        <message-translator class="text-message-translator"/>
+      </producer>
+    </standard-workflow>
+  </workflow-list>
+
+</channel>

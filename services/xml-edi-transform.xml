@@ -1,0 +1,16 @@
+<xml-edi-stream-service tmpl-desc="XML to EDI Transform Service&lt;br/&gt;Requires optional/edi" tmpl-name="Apply an XML to EDI Transformation"  tmpl-type="service" tmpl-wizard="true"
+ wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
+>
+
+ <edi-separator-set>
+  <separator-chars>:+.? &apos;+</separator-chars>
+  <invalid-chars>:+?&apos;</invalid-chars>
+ </edi-separator-set>
+ <xml-tagnames class="edi-legacy-xml-tag-names"/>
+ <input-charset>US-ASCII</input-charset>
+ <output-charset>UTF-8</output-charset>
+ <xml-definition-url wizard-key="EDI Definition File" wizard-desc="The GXML definition File" wizard-step="transform"></xml-definition-url>
+ <messageName wizard-key="Message Type" wizard-desc="The EDI Message Type" wizard-step="transform">INVOIC</messageName>
+ <messageVersion wizard-key="Message Version" wizard-desc="The EDI Message Version" wizard-step="transform">D96A</messageVersion>
+ <messageOrganisation wizard-key="Message Organisation" wizard-desc="The type of EDI mesage (generally EDIFACT, X12, TRADACOMS)" wizard-step="transform">EDIFACT</messageOrganisation>
+</xml-edi-stream-service>

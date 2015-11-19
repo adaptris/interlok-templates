@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms-connection tmpl-desc="A Basic ActiveMQ JMS Connection" tmpl-name="A Basic ActiveMQ Connection"  tmpl-type="connection" tmpl-wizard="true"
+ wizard-broker-order="0" wizard-broker-desc="Configure the broker">
+  <unique-id wizard-key="Unique ID" wizard-desc="The Unique ID for this connection (mandatory if using as a shared-connection)" wizard-step="broker"></unique-id>
+  <connection-error-handler class="jms-connection-error-handler"/>
+  <vendor-implementation class="basic-active-mq-implementation">
+   <broker-url wizard-key="broker-url" wizard-desc="Where is the ActiveMQ Broker" wizard-step="broker"></broker-url>
+  </vendor-implementation>
+  <user-name wizard-key="Username" wizard-desc="Where is the ActiveMQ Broker" wizard-step="broker"></user-name>
+  <password wizard-key="Users Password" wizard-desc="Where is the ActiveMQ Broker" wizard-step="broker" wizard-type="Password" ></password>
+  <client-id wizard-key="The JMS Client ID" wizard-desc="The Client ID used to connect to the broker" wizard-step="broker"></client-id>
+</jms-connection>

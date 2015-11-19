@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel tmpl-name="Handle HTTP Request"
+         tmpl-desc="Accept a HTTP Request, and send a response&lt;br/&gt;Any exception sends a 500 server error with no data."
+         tmpl-type="channel" tmpl-wizard="true"
+         wizard-http-order="1" wizard-http-desc="Configure the HTTP Consumer"
+>
+  <consume-connection class="jetty-embedded-connection" />
+  <message-error-handler class="standard-processing-exception-handler">
+   <processing-exception-service class="service-list">
+     <services>
+      <standalone-producer>
+       <producer class="jetty-response-producer">
+         <http-response-code>500</http-response-code>
+         <send-payload>false</send-payload>
+       </producer>
+      </standalone-producer>
+     </services>
+   </processing-exception-service>
+  </message-error-handler>
+  <workflow-list>
+     <pooling-workflow>
+       <jetty-pooling-workflow-interceptor/>
+       <consumer class="jetty-message-consumer">
+         <destination class="configured-consume-destination">
+           <destination wizard-key="URL" wizard-desc="The URL for incoming requests" wizard-step="http"></destination>
+           <configured-thread-name wizard-key="URL" wizard-step="http"></configured-thread-name>
+         </destination>
+       </consumer>
+       <service-collection class="service-list">
+         <services>
+          <standalone-producer>
+            <producer class="jetty-response-producer">
+              <http-response-code>200</http-response-code>
+              <send-payload>true</send-payload>
+            </producer>
+          </standalone-producer>
+         </services>
+       </service-collection>
+     </pooling-workflow>
+  </workflow-list>
+
+</channel>

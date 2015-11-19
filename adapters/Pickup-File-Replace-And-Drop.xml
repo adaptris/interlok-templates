@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adapter tmpl-desc="Pickup-File-Replace-And-Drop adapter&lt;br/&gt;Pickup file, replace and drop it somewhere else"
+ tmpl-name="Pickup-File-Replace-And-Drop" tmpl-type="adapter" tmpl-wizard="true"
+ wizard-location-order="0" wizard-location-desc="Provide the location of where you want the file to be picked up and dropped"
+ wizard-findAndReplace-order="1" wizard-findAndReplace-desc="Provide the string to find and the value to replace it with">
+  <unique-id>Pickup-File-Replace-And-Drop</unique-id>
+  <heartbeat-event-interval>
+    <unit>MINUTES</unit>
+    <interval>60</interval>
+  </heartbeat-event-interval>
+  <message-error-handler class="standard-processing-exception-handler">
+    <processing-exception-service class="service-list">
+      <services>
+        <standalone-producer>
+          <connection class="null-connection"/>
+          <producer class="fs-producer">
+            <encoder class="mime-encoder"/>
+            <destination class="configured-produce-destination">
+              <destination>./messages/bad</destination>
+            </destination>
+            <create-dirs>true</create-dirs>
+          </producer>
+        </standalone-producer>
+      </services>
+    </processing-exception-service>
+  </message-error-handler>
+  <failed-message-retrier class="default-failed-message-retrier">
+    <standalone-consumer>
+      <connection class="null-connection"/>
+      <consumer class="fs-consumer">
+        <encoder class="mime-encoder">
+          <retain-unique-id>true</retain-unique-id>
+        </encoder>
+        <destination class="configured-consume-destination">
+          <configured-thread-name>MESSAGE_RETRY</configured-thread-name>
+          <destination>./messages/retry</destination>
+        </destination>
+        <poller class="quartz-cron-poller">
+          <cron-expression>0 */2 * * * ?</cron-expression>
+        </poller>
+        <create-dirs>true</create-dirs>
+      </consumer>
+    </standalone-consumer>
+  </failed-message-retrier>
+  <channel-list>
+    <channel>
+      <auto-start>true</auto-start>
+      <unique-id>Replace</unique-id>
+      <workflow-list>
+        <standard-workflow>
+          <unique-id>PickupReplaceAndDrop</unique-id>
+          <consumer class="fs-consumer">
+            <unique-id>PickupFile</unique-id>
+            <destination class="configured-consume-destination">
+              <destination wizard-key="pickupLocation" wizard-desc="Location where to pick up the file" wizard-step="location"></destination>
+            </destination>
+            <poller class="fixed-interval-poller">
+              <poll-interval>
+                <unit>MINUTES</unit>
+                <interval>1</interval>
+              </poll-interval>
+            </poller>
+            <create-dirs>true</create-dirs>
+          </consumer>
+          <service-collection class="service-list">
+            <services>
+              <find-and-replace-service>
+                <unique-id>FindAllAndReplace</unique-id>
+                <find-replace-pair>
+                  <find class="configured-replacement-source">
+                    <value wizard-key="findToken" wizard-desc="String to find in messages" wizard-step="findAndReplace"></value>
+                  </find>
+                  <replace class="configured-replacement-source">
+                    <value wizard-key="replaceToken" wizard-desc="String value to replace the found string with" wizard-step="findAndReplace"></value>
+                  </replace>
+                </find-replace-pair>
+                <replace-first-only>false</replace-first-only>
+              </find-and-replace-service>
+            </services>
+          </service-collection>
+          <producer class="fs-producer">
+            <unique-id>DropFile</unique-id>
+            <destination class="configured-produce-destination">
+              <destination wizard-key="dropLocation" wizard-desc="Location where to drop the file" wizard-step="location"></destination>
+            </destination>
+            <create-dirs>true</create-dirs>
+          </producer>
+          <message-metrics-interceptor>
+            <unique-id>PickupReplaceAndDropStatistics</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>100</timeslice-history-count>
+          </message-metrics-interceptor>
+        </standard-workflow>
+      </workflow-list>
+    </channel>
+  </channel-list>
+  <message-error-digester class="standard-message-error-digester">
+    <digest-max-size>100</digest-max-size>
+    <unique-id>ErrorDigest</unique-id>
+  </message-error-digester>
+</adapter>

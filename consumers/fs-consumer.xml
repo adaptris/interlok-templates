@@ -1,0 +1,19 @@
+<fs-consumer tmpl-desc="Pickup from Filesystem" tmpl-name="Filesystem Consumer"  tmpl-type="consumer" tmpl-wizard="true"
+         wizard-filesystem-order="0" wizard-filesystem-desc="Configure the pickup"
+>
+  <destination class="configured-consume-destination">
+    <destination wizard-key="pickupLocation"
+                 wizard-desc="Location where to pick up the file"
+                 wizard-step="filesystem"></destination>
+  </destination>
+  <poller class="fixed-interval-poller">
+    <poll-interval>
+      <unit>SECONDS</unit>
+      <interval wizard-key="pickupInterval"
+                wizard-label="Seconds between each poll"
+                wizard-desc="The number of seconds between each poll"
+                wizard-step="filesystem">20</interval>
+    </poll-interval>
+  </poller>
+  <create-dirs>true</create-dirs>
+</fs-consumer>

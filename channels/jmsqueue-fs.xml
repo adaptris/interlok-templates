@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel tmpl-desc="Consume from a JMS Queue and write to Filesystem" tmpl-name="JMS Queue to Filesystem"  tmpl-type="channel" tmpl-wizard="true"
+         wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
+         wizard-filesystem-order="1" wizard-filesystem-desc="Configure the filesystem"
+>
+  <consume-connection class="shared-connection">
+    <lookup-name wizard-key="JmsSharedConnection"
+                 wizard-label="JMS Connection ID"
+                 wizard-desc="The ID of the JMS connection in the shared connections list"
+                 wizard-step="jms">jms-connection</lookup-name>
+  </consume-connection>
+  <workflow-list>
+    <standard-workflow>
+      <consumer class="jms-queue-consumer">
+        <destination class="configured-consume-destination">
+           <destination wizard-key="JMSQueue"
+                        wizard-label="JMS Queue"
+                        wizard-desc="The JMS Queue"
+                        wizard-step="jms">
+           </destination>
+        </destination>
+      </consumer>
+      <service-collection class="service-list">
+        <services>
+        </services>
+      </service-collection>
+      <producer class="fs-producer">
+        <unique-id>DropFile</unique-id>
+        <destination class="configured-produce-destination">
+          <destination wizard-key="dropLocation" wizard-desc="Location where to drop the file" wizard-step="filesystem"></destination>
+        </destination>
+        <create-dirs>true</create-dirs>
+      </producer>
+    </standard-workflow>
+  </workflow-list>
+
+</channel>

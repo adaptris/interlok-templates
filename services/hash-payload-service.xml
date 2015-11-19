@@ -1,0 +1,7 @@
+<payload-hashing-service tmpl-desc="Payload Hash Service" tmpl-name="Hash the current payload and store as metadata" tmpl-type="service" tmpl-wizard="true"
+                         wizard-hash-order="0" wizard-hash-desc="Configure the hash"
+>
+   <hash-algorithm wizard-key="hashalg" wizard-label="Hash Algorithm" wizard-desc="What Hashing Algorithm do you wish to apply" wizard-step="hash">SHA256</hash-algorithm>
+   <metadata-key wizard-key="metadatakey" wizard-label="Metadata Key" wizard-desc="Metadata key to store the hash against" wizard-step="hash">PayloadHash</metadata-key>
+</payload-hashing-service>
+

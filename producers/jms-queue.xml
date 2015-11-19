@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms-queue-producer tmpl-desc="Send to a Queue" tmpl-name="Produce To JMS (Queue)"  tmpl-type="producer" tmpl-wizard="true"
+         wizard-jms-order="0" wizard-jms-desc="Configure the JMS Producer"
+>
+
+    <destination class="configured-produce-destination">
+       <destination wizard-key="JMSQueue"
+                    wizard-label="JMS Queue"
+                    wizard-desc="The JMS Queue"
+                    wizard-step="jms">
+       </destination>
+    </destination>
+    <delivery-mode>PERSISTENT</delivery-mode>
+    <message-translator class="text-message-translator"/>
+</jms-queue-producer>

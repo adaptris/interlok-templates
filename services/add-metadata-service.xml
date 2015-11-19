@@ -1,0 +1,9 @@
+<add-metadata-service tmpl-desc="Add Metadata Service" tmpl-name="Add some static metadata" tmpl-type="service" tmpl-wizard="true"
+                      wizard-metadata-order="0" wizard-metadata-desc="Configure the metadata"
+>
+   <metadata-element>
+    <key wizard-key="key" wizard-desc="The Key" wizard-step="metadata"></key>
+    <value wizard-key="value" wizard-desc="The Value" wizard-step="metadata"></value>
+   </metadata-element>
+
+</add-metadata-service>

@@ -1,0 +1,11 @@
+<jms-topic-consumer tmpl-desc="Consume from a JMS Topic" tmpl-name="JMS Topic Consumer"  tmpl-type="consumer" tmpl-wizard="true"
+         wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
+>
+  <destination class="configured-consume-destination">
+    <destination wizard-key="JMSTopic"
+                 wizard-label="JMS Topic"
+                 wizard-desc="The JMS Topic"
+                 wizard-step="jms">
+    </destination>
+  </destination>
+</jms-topic-consumer>

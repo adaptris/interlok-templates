@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms-topic-producer tmpl-desc="Send to a JMS Topic" tmpl-name="Send To JMS (Topic)"  tmpl-type="producer" tmpl-wizard="true"
+         wizard-jms-order="0" wizard-jms-desc="Configure the JMS Producer"
+>
+   <destination class="configured-produce-destination">
+     <destination wizard-key="JMSTopic"
+                  wizard-label="JMS Topic"
+                  wizard-desc="The JMS Topic"
+                  wizard-step="jms">
+     </destination>
+  </destination>
+  <delivery-mode>PERSISTENT</delivery-mode>
+  <message-translator class="text-message-translator"/>
+</jms-topic-producer>
+
