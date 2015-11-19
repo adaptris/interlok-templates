@@ -1,5 +1,16 @@
-<edi-xml-stream-service tmpl-desc="EDI to XML Transform Service&lt;br/&gt;Requires optional/edi" tmpl-name="Transform EDI to XML"  tmpl-type="service" tmpl-wizard="true"
- wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
+<edi-xml-stream-service 
+         tmpl-alias="EDI XML Stream Service" 
+         tmpl-alias-value="edi-xml-stream-service" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.transform.edi.EdiXmlStreamService" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="EDI to XML Transform Service (Requires optional/edi-stream jars)" 
+         tmpl-keywords="com.adaptris.core.transform.edi.EdiXmlStreamService EDI XML Transform" 
+         tmpl-name="EDI to XML Stream Service" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Transform EDI to XML Service Template"
+         tmpl-type="service" tmpl-wizard="true"
+         wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
 >
  <edi-separator-set>
   <separator-chars>:+.? &apos;+</separator-chars>

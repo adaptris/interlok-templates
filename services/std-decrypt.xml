@@ -1,6 +1,17 @@
-<decryption-service tmpl-desc="Decrypt a document" tmpl-name="Standard Decryption"  tmpl-type="service" tmpl-wizard="true"
- wizard-decrypt-order="0" wizard-encrypt-desc="Configure what to decrypt, and for whom"
- wizard-security-order="1" wizard-security-desc="Configure the Security details"
+<decryption-service 
+         tmpl-alias="Decryption Service" 
+         tmpl-alias-value="decryption-service" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.security.DecryptionService" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Decrypt a document" 
+         tmpl-keywords="com.adaptris.core.security.DecryptionService" 
+         tmpl-name="Standard Decryption" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Standard Decryption Service Template"           
+         tmpl-type="service" tmpl-wizard="true"
+         wizard-decrypt-order="0" wizard-encrypt-desc="Configure what to decrypt, and for whom"
+         wizard-security-order="1" wizard-security-desc="Configure the Security details"
 >
   <remote-partner wizard-key="Remote Partner" wizard-desc="Partners certificate identifier in the keystore" wizard-step="decrypt">partnerA</remote-partner>
   <local-partner wizard-key="Local Partner" wizard-desc="Our private key identifier in the keystore" wizard-step="decrypt">partnerA</local-partner>

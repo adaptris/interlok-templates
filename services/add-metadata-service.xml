@@ -1,5 +1,16 @@
-<add-metadata-service tmpl-desc="Add Metadata Service" tmpl-name="Add some static metadata" tmpl-type="service" tmpl-wizard="true"
-                      wizard-metadata-order="0" wizard-metadata-desc="Configure the metadata"
+<add-metadata-service              
+         tmpl-alias="Add Metadata Service" 
+         tmpl-alias-value="add-metadata-service" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.services.metadata.AddMetadataService" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Add some static metadata to the message" 
+         tmpl-keywords="com.adaptris.core.services.metadata.AddMetadataService static data metadata element" 
+         tmpl-name="Add Metadata Service" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Add Static Data Metadata Service Template"
+         tmpl-type="service" tmpl-wizard="true"
+         wizard-metadata-order="0" wizard-metadata-desc="Configure the metadata"
 >
    <metadata-element>
     <key wizard-key="key" wizard-desc="The Key" wizard-step="metadata"></key>

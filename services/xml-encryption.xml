@@ -1,6 +1,17 @@
-<encrypt-only-service tmpl-desc="Encrypt an XML document&lt;br/&gt;Requires optional/xml-security" tmpl-name="XML Encryption"  tmpl-type="service" tmpl-wizard="true"
- wizard-encrypt-order="0" wizard-encrypt-desc="Configure what to encrypt, and for whom"
- wizard-security-order="1" wizard-security-desc="Configure the Security details"
+<encrypt-only-service 
+         tmpl-alias="Encrypt Only Service" 
+         tmpl-alias-value="encrypt-only-service" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.security.EncryptionOnlyService" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Encrypt an XML document (Requires optional/xml-security jars)" 
+         tmpl-keywords="com.adaptris.core.security.EncryptionOnlyService Encrypt XML" 
+         tmpl-name="Encrypt XML Document" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="XML Encrypt Service Template"  
+         tmpl-type="service" tmpl-wizard="true"
+         wizard-encrypt-order="0" wizard-encrypt-desc="Configure what to encrypt, and for whom"
+         wizard-security-order="1" wizard-security-desc="Configure the Security details"
 >
 
   <remote-partner wizard-key="Remote Partner" wizard-desc="Partners certificate identifier in the keystore" wizard-step="encrypt">partnerA</remote-partner>

@@ -1,5 +1,16 @@
-<xml-transform-service tmpl-desc="XML Transform Service" tmpl-name="Apply an XML Transformation"  tmpl-type="service" tmpl-wizard="true"
- wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
+<xml-transform-service 
+         tmpl-alias="XML Transform Service" 
+         tmpl-alias-value="xml-transform-service" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.transform.XmlTransformService" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Apply an XML Transformation" 
+         tmpl-keywords="com.adaptris.core.transform.XmlTransformService Xml Transform" 
+         tmpl-name="Transform an XML Document" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="XML Transform Service Template"  
+         tmpl-type="service" tmpl-wizard="true"
+         wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
 >
  <url wizard-key="Transform URL" wizard-desc="What XML Transform do you wish to apply" wizard-step="transform"></url>
  <use-metadata-as-stylesheet-parameters>true</use-metadata-as-stylesheet-parameters>

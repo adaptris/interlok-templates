@@ -1,6 +1,17 @@
-<encrypt-and-sign-service tmpl-desc="Encrypt and Sign a document" tmpl-name="Standard Encrypt+Sign"  tmpl-type="service" tmpl-wizard="true"
- wizard-encrypt-order="0" wizard-encrypt-desc="Configure what to encrypt, and for whom"
- wizard-security-order="1" wizard-security-desc="Configure the Security details"
+<encrypt-and-sign-service 
+         tmpl-alias="Encrypt And Sign Service" 
+         tmpl-alias-value="encrypt-and-sign-service" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.security.EncryptionSigningService" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Encrypt and Sign a document" 
+         tmpl-keywords="com.adaptris.core.security.EncryptionSigningService Encrypt Sign Standard" 
+         tmpl-name="Standard Encrypt and Sign" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Standard Encrypt and Sign Service Template"           
+         tmpl-type="service" tmpl-wizard="true"
+         wizard-encrypt-order="0" wizard-encrypt-desc="Configure what to encrypt, and for whom"
+         wizard-security-order="1" wizard-security-desc="Configure the Security details"
 >
   <remote-partner wizard-key="Remote Partner" wizard-desc="Partners certificate identifier in the keystore" wizard-step="encrypt">partnerA</remote-partner>
   <local-partner wizard-key="Local Partner" wizard-desc="Our private key identifier in the keystore" wizard-step="encrypt">partnerA</local-partner>
