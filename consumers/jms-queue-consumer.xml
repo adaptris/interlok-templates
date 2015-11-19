@@ -1,4 +1,15 @@
-<jms-queue-consumer tmpl-desc="Consume from a JMS Queue" tmpl-name="JMS Queue Consumer"  tmpl-type="consumer" tmpl-wizard="true"
+<jms-queue-consumer 
+         tmpl-alias="JMS Queue Consumer" 
+         tmpl-alias-value="jms-queue-consumer" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.jms.PtpConsumer" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Consume a message from a JMS Queue" 
+         tmpl-keywords="com.adaptris.core.jms.PtpConsumer JMS Queue Consumer" 
+         tmpl-name="JMS Queue Consumer" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="JMS Queue Consumer Template"                     
+         tmpl-type="consumer" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
 >
   <destination class="configured-consume-destination">

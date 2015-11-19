@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<channel tmpl-name="Handle HTTP Request"
-         tmpl-desc="Accept a HTTP Request, and send a response&lt;br/&gt;Any exception sends a 500 server error with no data."
+<channel 
+         tmpl-alias="Channel" 
+         tmpl-alias-value="channel" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.Channel" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Accept a HTTP Request and send a response. Any exception sends a 500 server error with no data." 
+         tmpl-keywords="com.adaptris.core.Channel HTTP Request Response Responder" 
+         tmpl-name="Handle HTTP Request" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Handle HTTP Request Channel Template" 
          tmpl-type="channel" tmpl-wizard="true"
          wizard-http-order="1" wizard-http-desc="Configure the HTTP Consumer"
 >

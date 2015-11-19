@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jms-topic-producer tmpl-desc="Send to a JMS Topic" tmpl-name="Send To JMS (Topic)"  tmpl-type="producer" tmpl-wizard="true"
+<jms-topic-producer 
+         tmpl-alias="JMS Topic Producer" 
+         tmpl-alias-value="jms-topic-producer" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.jms.PasProducer" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Produce a message to a JMS Topic" 
+         tmpl-keywords="com.adaptris.core.jms.PasProducer JMS Topic Producer" 
+         tmpl-name="JMS Topic Producer" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="JMS Topic Producer Template"
+         tmpl-type="producer" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Producer"
 >
    <destination class="configured-produce-destination">

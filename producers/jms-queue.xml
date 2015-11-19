@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jms-queue-producer tmpl-desc="Send to a Queue" tmpl-name="Produce To JMS (Queue)"  tmpl-type="producer" tmpl-wizard="true"
+<jms-queue-producer 
+         tmpl-alias="JMS Queue Producer" 
+         tmpl-alias-value="jms-queue-producer" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.jms.PtpProducer" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Produce a message to a JMS Queue" 
+         tmpl-keywords="com.adaptris.core.jms.PtpProducer JMS Queue Producer" 
+         tmpl-name="JMS Queue Producer" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="JMS Queue Producer Template"           
+         tmpl-type="producer" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Producer"
 >
 

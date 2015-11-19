@@ -1,4 +1,15 @@
-<jms-topic-consumer tmpl-desc="Consume from a JMS Topic" tmpl-name="JMS Topic Consumer"  tmpl-type="consumer" tmpl-wizard="true"
+<jms-topic-consumer 
+         tmpl-alias="JMS Topic Consumer" 
+         tmpl-alias-value="jms-topic-consumer" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.jms.PasConsumer" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Consume a message from a JMS Topic" 
+         tmpl-keywords="com.adaptris.core.jms.PasConsumer JMS Topic Consumer" 
+         tmpl-name="JMS Topic Consumer" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="JMS Topic Consumer Template"  
+         tmpl-type="consumer" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
 >
   <destination class="configured-consume-destination">

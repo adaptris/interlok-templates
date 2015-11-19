@@ -1,7 +1,16 @@
-<pooling-workflow tmpl-name="Handle HTTP Request"
-                  tmpl-desc="Accept a HTTP Request, and send a response"
-                  tmpl-type="workflow" tmpl-wizard="true"
-                  wizard-http-order="0" wizard-http-desc="Configure the HTTP Consumer"
+<pooling-workflow 
+         tmpl-alias="Pooling Workflow" 
+         tmpl-alias-value="pooling-workflow" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.PoolingWorkflow" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Accept a HTTP Request, and send a response" 
+         tmpl-keywords="com.adaptris.core.PoolingWorkflow HTTP Request Handler Jetty Message Response" 
+         tmpl-name="HTTP Request Handler" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="HTTP Request Handler Workflow Template"
+         tmpl-type="workflow" tmpl-wizard="true"
+         wizard-http-order="0" wizard-http-desc="Configure the HTTP Consumer"
 >
   <jetty-pooling-workflow-interceptor/>
   <consumer class="jetty-message-consumer">

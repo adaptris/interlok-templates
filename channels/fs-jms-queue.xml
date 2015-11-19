@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<channel tmpl-desc="Pickup from Filesystem and send to JMS" tmpl-name="Filesystem To JMS (Queue)"  tmpl-type="channel" tmpl-wizard="true"
+<channel 
+         tmpl-alias="Channel" 
+         tmpl-alias-value="channel" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.Channel" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Pickup from Filesystem and send to JMS" 
+         tmpl-keywords="com.adaptris.core.Channel File System JMS Queue" 
+         tmpl-name="Filesystem To JMS Queue" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Filesystem To JMS Queue Channel Template" 
+         tmpl-type="channel" tmpl-wizard="true"
          wizard-filesystem-order="0" wizard-filesystem-desc="Configure the pickup"
          wizard-jms-order="1" wizard-jms-desc="Configure the JMS Producer"
 >

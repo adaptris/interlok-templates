@@ -1,4 +1,15 @@
-<fs-consumer tmpl-desc="Pickup from Filesystem" tmpl-name="Filesystem Consumer"  tmpl-type="consumer" tmpl-wizard="true"
+<fs-consumer 
+         tmpl-alias="FS Consumer" 
+         tmpl-alias-value="fs-consumer" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.fs.FsConsumer" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Pickup a file (the message) from Filesystem" 
+         tmpl-keywords="com.adaptris.core.fs.FsConsumer Filesystem Consumer" 
+         tmpl-name="File System Consumer" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="File System Consumer Template" 
+         tmpl-type="consumer" tmpl-wizard="true"
          wizard-filesystem-order="0" wizard-filesystem-desc="Configure the pickup"
 >
   <destination class="configured-consume-destination">

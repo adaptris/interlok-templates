@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<channel tmpl-desc="Consume from a JMS Queue and write to Filesystem" tmpl-name="JMS Queue to Filesystem"  tmpl-type="channel" tmpl-wizard="true"
+<channel 
+         tmpl-alias="Channel" 
+         tmpl-alias-value="channel" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.Channel" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Consume from a JMS Queue and write to File System" 
+         tmpl-keywords="com.adaptris.core.Channel File System JMS Queue" 
+         tmpl-name="JMS Queue to Filesystem" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="JMS Queue to Filesystem Channel Template" 
+         tmpl-type="channel" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
          wizard-filesystem-order="1" wizard-filesystem-desc="Configure the filesystem"
 >
