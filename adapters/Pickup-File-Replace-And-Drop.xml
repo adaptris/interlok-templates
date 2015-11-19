@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<adapter tmpl-desc="Pickup-File-Replace-And-Drop adapter&lt;br/&gt;Pickup file, replace and drop it somewhere else"
- tmpl-name="Pickup-File-Replace-And-Drop" tmpl-type="adapter" tmpl-wizard="true"
- wizard-location-order="0" wizard-location-desc="Provide the location of where you want the file to be picked up and dropped"
- wizard-findAndReplace-order="1" wizard-findAndReplace-desc="Provide the string to find and the value to replace it with">
+<adapter 
+         tmpl-alias="Adapter" 
+         tmpl-alias-value="adapter" 
+         tmpl-author="Adaptris" 
+         tmpl-class-name="com.adaptris.core.Adapter" 
+         tmpl-created="2015-11-17T10:00:00" 
+         tmpl-desc="Pickup a file, replace values it in and drop it somewhere else" 
+         tmpl-keywords="com.adaptris.core.Adapter File System Consume Replace Produce" 
+         tmpl-name="Pickup-File-Replace-And-Drop" 
+         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-title="Pickup File Replace And Drop Adapter Template" 
+         tmpl-type="adapter" tmpl-wizard="true"
+         wizard-location-order="0" wizard-location-desc="Provide the location of where you want the file to be picked up and dropped"
+         wizard-findAndReplace-order="1" wizard-findAndReplace-desc="Provide the string to find and the value to replace it with">
   <unique-id>Pickup-File-Replace-And-Drop</unique-id>
   <heartbeat-event-interval>
     <unit>MINUTES</unit>
