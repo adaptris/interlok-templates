@@ -17,8 +17,7 @@
      <destination wizard-key="JMSTopic"
                   wizard-label="JMS Topic"
                   wizard-desc="The JMS Topic"
-                  wizard-step="jms">
-     </destination>
+                  wizard-step="jms"></destination>
   </destination>
   <delivery-mode>PERSISTENT</delivery-mode>
   <message-translator class="text-message-translator"/>

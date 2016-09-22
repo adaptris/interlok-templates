@@ -18,8 +18,7 @@
        <destination wizard-key="JMSQueue"
                     wizard-label="JMS Queue"
                     wizard-desc="The JMS Queue"
-                    wizard-step="jms">
-       </destination>
+                    wizard-step="jms"></destination>
     </destination>
     <delivery-mode>PERSISTENT</delivery-mode>
     <message-translator class="text-message-translator"/>
