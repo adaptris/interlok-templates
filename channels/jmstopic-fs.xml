@@ -6,7 +6,7 @@
          tmpl-class-name="com.adaptris.core.Channel" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Subscribe to a JMS Topic and write to Filesystem" 
-         tmpl-keywords="com.adaptris.core.Channel File System JMS Topic" 
+         tmpl-keywords="File System JMS Topic" 
          tmpl-name="JMS Topic to Filesystem" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="JMS Topic to Filesystem Channel Template" 

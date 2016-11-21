@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.services.metadata.XpathMetadataService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Extract values using an Xpath and store as metadata" 
-         tmpl-keywords="com.adaptris.core.services.metadata.XpathMetadataService Extract Xpath Metadata" 
+         tmpl-keywords="Extract Xpath Metadata" 
          tmpl-name="Extract Xpath to Metadata" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Xpath to Metadata Service Template"  

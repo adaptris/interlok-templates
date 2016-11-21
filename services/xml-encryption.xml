@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.security.EncryptionOnlyService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Encrypt an XML document (Requires optional/xml-security jars)" 
-         tmpl-keywords="com.adaptris.core.security.EncryptionOnlyService Encrypt XML" 
+         tmpl-keywords="Encrypt XML" 
          tmpl-name="Encrypt XML Document" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="XML Encrypt Service Template"  

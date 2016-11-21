@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.jms.PasConsumer" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Consume a message from a JMS Topic" 
-         tmpl-keywords="com.adaptris.core.jms.PasConsumer JMS Topic Consumer" 
+         tmpl-keywords="JMS Topic Consumer" 
          tmpl-name="JMS Topic Consumer" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="JMS Topic Consumer Template"  

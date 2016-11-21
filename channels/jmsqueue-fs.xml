@@ -6,7 +6,7 @@
          tmpl-class-name="com.adaptris.core.Channel" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Consume from a JMS Queue and write to File System" 
-         tmpl-keywords="com.adaptris.core.Channel File System JMS Queue" 
+         tmpl-keywords="File System JMS Queue" 
          tmpl-name="JMS Queue to Filesystem" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="JMS Queue to Filesystem Channel Template" 

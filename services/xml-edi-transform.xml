@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.transform.edi.XmlEdiStreamService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="XML to EDI Transform Service (Requires optional/edi-stream jars)" 
-         tmpl-keywords="com.adaptris.core.transform.edi.XmlEdiStreamService EDI XML Transform" 
+         tmpl-keywords="EDI XML Transform" 
          tmpl-name="Apply an XML to EDI Transformation" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Transform XML to EDI Service Template"

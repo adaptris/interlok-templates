@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.services.metadata.PayloadHashingService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Create a SHA256 hash of the payload and store as metadata" 
-         tmpl-keywords="com.adaptris.core.services.metadata.PayloadHashingService SHA256 hash data metadata element" 
+         tmpl-keywords="SHA256 hash data metadata element" 
          tmpl-name="Payload Hashing Service" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Payload SHA256 Hashing Service Template"

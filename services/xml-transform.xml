@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.transform.XmlTransformService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Apply an XML Transformation" 
-         tmpl-keywords="com.adaptris.core.transform.XmlTransformService Xml Transform" 
+         tmpl-keywords="Xml Transform" 
          tmpl-name="Transform an XML Document" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="XML Transform Service Template"  

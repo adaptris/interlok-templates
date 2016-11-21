@@ -6,7 +6,7 @@
             tmpl-class-name="com.adaptris.core.Adapter" 
             tmpl-created="2015-11-17T10:00:00" 
             tmpl-desc="Transfer messages from one queue to another queue" 
-            tmpl-keywords="com.adaptris.core.Adapter ActiveMQ Queue" 
+            tmpl-keywords="ActiveMQ Queue" 
             tmpl-name="ActiveMQQueueTransfer" 
             tmpl-target-version="3.1.0-RELEASE" 
             tmpl-title="Active MQ Queue Transfer Adapter Template" 

@@ -6,7 +6,7 @@
          tmpl-class-name="com.adaptris.core.Adapter" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Pickup a file, replace values it in and drop it somewhere else" 
-         tmpl-keywords="com.adaptris.core.Adapter File System Consume Replace Produce" 
+         tmpl-keywords="File System Consume Replace Produce" 
          tmpl-name="Pickup-File-Replace-And-Drop" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Pickup File Replace And Drop Adapter Template" 

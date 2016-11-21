@@ -6,7 +6,7 @@
          tmpl-class-name="com.adaptris.core.jms.PasProducer" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Produce a message to a JMS Topic" 
-         tmpl-keywords="com.adaptris.core.jms.PasProducer JMS Topic Producer" 
+         tmpl-keywords="JMS Topic Producer" 
          tmpl-name="JMS Topic Producer" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="JMS Topic Producer Template"

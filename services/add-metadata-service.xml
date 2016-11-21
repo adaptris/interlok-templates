@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.services.metadata.AddMetadataService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Add some static metadata to the message" 
-         tmpl-keywords="com.adaptris.core.services.metadata.AddMetadataService static data metadata element" 
+         tmpl-keywords="static data metadata element" 
          tmpl-name="Add Metadata Service" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Add Static Data Metadata Service Template"

@@ -6,7 +6,7 @@
          tmpl-class-name="com.adaptris.core.jms.JmsConnection" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="A Basic SonicMQ JMS Connection (Requires optional/jms-sonicmq jars installing)" 
-         tmpl-keywords="com.adaptris.core.jms.JmsConnection SonicMQ JMS Connection" 
+         tmpl-keywords="SonicMQ JMS Connection" 
          tmpl-name="Basic SonicMQ Connection" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Basic SonicMQ Connection Template" 

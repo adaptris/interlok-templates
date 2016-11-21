@@ -6,7 +6,7 @@
          tmpl-class-name="com.adaptris.core.jms.JmsConnection" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="A Basic ActiveMQ JMS Connection" 
-         tmpl-keywords="com.adaptris.core.jms.JmsConnection ActiveMQ JMS Connection" 
+         tmpl-keywords="ActiveMQ JMS Connection" 
          tmpl-name="Basic ActiveMQ Connection" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Basic ActiveMQ Connection Template" 
