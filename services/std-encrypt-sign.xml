@@ -5,7 +5,7 @@
          tmpl-class-name="com.adaptris.core.security.EncryptionSigningService" 
          tmpl-created="2015-11-17T10:00:00" 
          tmpl-desc="Encrypt and Sign a document" 
-         tmpl-keywords="com.adaptris.core.security.EncryptionSigningService Encrypt Sign Standard" 
+         tmpl-keywords="Encrypt Sign Standard" 
          tmpl-name="Standard Encrypt and Sign" 
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Standard Encrypt and Sign Service Template"           
