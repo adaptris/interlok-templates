@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><adapter tmpl-alias="adapter" tmpl-alias-value="adapter" tmpl-author="Adaptris" tmpl-class-name="com.adaptris.core.Adapter" tmpl-created="2017-01-12T10:00:00" tmpl-desc="Transfer an MQTT messages from one topic to another topic" tmpl-keywords="MQTT" tmpl-name="MQTTTopicTransfer" tmpl-target-version="3.5.1-RELEASE" tmpl-title="MQTT Topic Transfer Adapter Template" tmpl-type="adapter" tmpl-wizard="true" wizard-step1-desc="MQTT Connection details" wizard-step1-label="connection" wizard-step1-order="1" wizard-step2-desc="Source Topic to transfer the message from" wizard-step2-label="consume" wizard-step2-order="2" wizard-step3-desc="Destination Topic to transfer the message to" wizard-step3-label="produce" wizard-step3-order="3" wizard-step4-desc="Last Will message" wizard-step4-label="lastwill" wizard-step4-order="4">
+  <unique-id>MQTTTopicTransfer</unique-id>
+  <start-up-event-imp>com.adaptris.core.event.StandardAdapterStartUpEvent</start-up-event-imp>
+  <heartbeat-event-imp>com.adaptris.core.HeartbeatEvent</heartbeat-event-imp>
+  <log-handler class="null-log-handler"/>
+  <shared-components>
+    <connections>
+      <mqtt-connection>
+        <unique-id>MQTTConnection</unique-id>
+        <server-uri wizard-desc="MQTT Server URL (usually tcp://localhost:1883)" wizard-key="mqttConnection.serverUri" wizard-label="" wizard-step="step1" wizard-type="String">tcp://localhost:1883</server-uri>
+        <username wizard-desc="The username to connect to the server" wizard-key="mqttConnection.username" wizard-label="" wizard-step="step1" wizard-type="String"></username>
+        <password wizard-desc="The password to connect to the server" wizard-key="mqttConnection.password" wizard-label="" wizard-step="step1" wizard-type="Password"></password>
+        <protocol-version>DEFAULT</protocol-version>
+        <clean-session>true</clean-session>
+        <last-will>
+          <topic wizard-desc="Topic to send the Last Will message to" wizard-key="mqttLastWill.topic" wizard-label="" wizard-step="step4" wizard-type="String"></topic>
+          <qos>1</qos>
+          <retained>true</retained>
+          <payload wizard-desc="Paylod of the Last Will message" wizard-key="mqttLastWill.payload" wizard-label="" wizard-step="step4" wizard-type="String"></payload>
+          <payload-char-encoding>UTF-8</payload-char-encoding>
+        </last-will>
+      </mqtt-connection>
+    </connections>
+  </shared-components>
+  <event-handler class="default-event-handler">
+    <unique-id>DefaultEventHandler</unique-id>
+    <connection class="null-connection">
+      <unique-id>furious-lamport</unique-id>
+    </connection>
+    <producer class="null-message-producer">
+      <unique-id>tender-montalcini</unique-id>
+    </producer>
+  </event-handler>
+  <heartbeat-event-interval>
+    <unit>MINUTES</unit>
+    <interval>60</interval>
+  </heartbeat-event-interval>
+  <message-error-handler class="standard-processing-exception-handler">
+    <processing-exception-service class="service-list">
+      <services>
+        <standalone-producer>
+          <producer class="fs-producer">
+            <encoder class="mime-encoder"/>
+            <destination class="configured-produce-destination">
+              <destination>./messages/bad</destination>
+            </destination>
+            <create-dirs>true</create-dirs>
+          </producer>
+        </standalone-producer>
+      </services>
+    </processing-exception-service>
+  </message-error-handler>
+  <failed-message-retrier class="default-failed-message-retrier">
+    <standalone-consumer>
+      <consumer class="fs-consumer">
+        <encoder class="mime-encoder">
+          <retain-unique-id>true</retain-unique-id>
+        </encoder>
+        <destination class="configured-consume-destination">
+          <configured-thread-name>MESSAGE_RETRY</configured-thread-name>
+          <destination>./messages/retry</destination>
+        </destination>
+        <poller class="quartz-cron-poller">
+          <cron-expression>0 */2 * * * ?</cron-expression>
+        </poller>
+        <create-dirs>true</create-dirs>
+      </consumer>
+    </standalone-consumer>
+  </failed-message-retrier>
+  <channel-list>
+    <channel>
+      <consume-connection class="shared-connection">
+        <lookup-name>MQTTConnection</lookup-name>
+      </consume-connection>
+      <produce-connection class="shared-connection">
+        <lookup-name>MQTTConnection</lookup-name>
+      </produce-connection>
+      <workflow-list>
+        <standard-workflow>
+          <consumer class="mqtt-consumer">
+            <message-factory class="default-message-factory">
+              <default-char-encoding>utf-8</default-char-encoding>
+            </message-factory>
+            <unique-id>MQTTConsumer</unique-id>
+            <destination class="configured-consume-destination">
+              <destination wizard-desc="MQTT Consume Topic" wizard-key="configuredConsumeDestination.destination" wizard-label="MQTT Consume Topic" wizard-step="step2" wizard-type="String"></destination>
+            </destination>
+            <time-to-wait>
+              <unit>SECONDS</unit>
+              <interval>30</interval>
+            </time-to-wait>
+          </consumer>
+          <service-collection class="service-list">
+            <unique-id>small-curie</unique-id>
+            <services/>
+          </service-collection>
+          <producer class="mqtt-producer">
+            <message-factory class="default-message-factory">
+              <default-char-encoding>utf-8</default-char-encoding>
+            </message-factory>
+            <unique-id>MQTTProducer</unique-id>
+            <destination class="configured-produce-destination">
+              <destination wizard-desc="MQTT Produce Topic" wizard-key="configuredProduceDestination.destination" wizard-label="MQTT Produce Topic" wizard-step="step3" wizard-type="String"></destination>
+            </destination>
+            <qos>1</qos>
+            <retained>false</retained>
+            <time-to-wait>
+              <unit>SECONDS</unit>
+              <interval>30</interval>
+            </time-to-wait>
+          </producer>
+          <produce-exception-handler class="null-produce-exception-handler"/>
+          <unique-id>MQTTWorkflow</unique-id>
+          <message-metrics-interceptor>
+            <unique-id>MQTTWorkflow</unique-id>
+            <timeslice-duration>
+              <unit>MINUTES</unit>
+              <interval>5</interval>
+            </timeslice-duration>
+            <timeslice-history-count>12</timeslice-history-count>
+          </message-metrics-interceptor>
+          <in-flight-workflow-interceptor>
+            <unique-id>MQTTWorkflow</unique-id>
+          </in-flight-workflow-interceptor>
+        </standard-workflow>
+      </workflow-list>
+      <unique-id>MQTTChannel</unique-id>
+    </channel>
+  </channel-list>
+  <message-error-digester class="standard-message-error-digester">
+    <digest-max-size>100</digest-max-size>
+    <unique-id>ErrorDigest</unique-id>
+  </message-error-digester>
+</adapter>
