@@ -13,7 +13,7 @@
          wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
 >
 
- <edi-separator-set>
+ <edi-separator-set class="edi-custom-separators">
   <separator-chars>:+.? &apos;+</separator-chars>
   <invalid-chars>:+?&apos;</invalid-chars>
  </edi-separator-set>
