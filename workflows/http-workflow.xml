@@ -22,10 +22,16 @@
   <service-collection class="service-list">
     <services>
       <standalone-producer>
-        <producer class="jetty-response-producer">
-          <http-response-code>200</http-response-code>
-          <send-payload>true</send-payload>
-        </producer>
+            <producer class="jetty-standard-response-producer">
+              <status-provider class="http-configured-status">
+                <status>OK_200</status>
+              </status-provider>
+              <response-header-provider class="jetty-no-response-headers"/>
+              <content-type-provider class="http-configured-content-type-provider">
+                <mime-type>text/plain</mime-type>
+              </content-type-provider>
+              <send-payload>true</send-payload>
+            </producer>
       </standalone-producer>
     </services>
   </service-collection>
