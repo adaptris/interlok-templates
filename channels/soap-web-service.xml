@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel
+	    tmpl-alias="Channel"
+        tmpl-alias-value="channel"
+        tmpl-author="Adaptris"
+        tmpl-class-name="com.adaptris.core.Channel"
+        tmpl-created="2017-02-02T02:02:02"
+        tmpl-desc="Build a single operation Soap Web Service"
+        tmpl-keywords="channel webservice soap wsdl"
+        tmpl-name="Soap Web Service"
+        tmpl-target-version="3.6.1-RELEASE"
+        tmpl-title="Channel Soap WebService Template"
+        tmpl-type="channel" tmpl-wizard="true"
+        wizard-step1-label="Web Service" wizard-step1-desc="Web Service Properties"
+        wizard-step1-order="1"
+        wizard-step2-label="Xml Validation" wizard-step2-desc="Xml Validation Schema"
+        wizard-step2-order="2"
+>
+  <xslt-wizard>
+    <xslt-wizard-key default="http://localhost:8080">soap.url.host</xslt-wizard-key>
+    <xslt-wizard-key>soap.url.path</xslt-wizard-key>
+    <xslt-wizard-key>soap.action</xslt-wizard-key>
+    <xslt-wizard-key>soap.operation</xslt-wizard-key>
+    <xslt-wizard-key>request.root.element</xslt-wizard-key>
+    <xslt-wizard-key>schema.request</xslt-wizard-key>
+    <xslt-wizard-key>response.root.element</xslt-wizard-key>
+    <xslt-wizard-key>schema.response</xslt-wizard-key>
+    
+    <xslt-wizard-key-to-replace>soap.wsdl</xslt-wizard-key-to-replace>
+    
+    <dynamic-wizard-property wizard-desc="Url for this web service. If left empty the default is http://localhost:8080" wizard-key="soap.url.host" wizard-label="Web Service Host" wizard-step="step1" wizard-type="String">http://localhost:8080</dynamic-wizard-property>
+    <dynamic-wizard-property wizard-desc="Url path to access the web service" wizard-key="soap.url.path" wizard-label="Web Service Url Path" wizard-step="step1" wizard-type="String"></dynamic-wizard-property>
+    <dynamic-wizard-property wizard-desc="SOAP action" wizard-key="soap.action" wizard-label="SOAP Action" wizard-step="step1" wizard-type="String"></dynamic-wizard-property>
+    <dynamic-wizard-property wizard-desc="SOAP operation name" wizard-key="soap.operation" wizard-label="SOAP Operation Name" wizard-step="step1" wizard-type="String"></dynamic-wizard-property>
+    <dynamic-wizard-property wizard-desc="Request root element" wizard-key="request.root.element" wizard-label="Request Root Element" wizard-step="step2" wizard-type="String" wizard-order="1"></dynamic-wizard-property>
+    <dynamic-wizard-property wizard-desc="Response root element" wizard-key="response.root.element" wizard-label="Response Root Element" wizard-step="step2" wizard-type="String" wizard-order="3"></dynamic-wizard-property>
+    <xslt-template><![CDATA[
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsl:output method="xml" omit-xml-declaration="yes" indent="yes" />
+
+  <xsl:template match="/">
+
+    <!-- <xsl:value-of select="."/> -->
+
+    <wsdl:definitions>
+      <xsl:attribute name="targetNamespace">
+      <xsl:value-of select="concat(properties/soap-url-host, properties/soap-url-path)" />
+    </xsl:attribute>
+      <xsl:attribute name="xmlnstns">
+      <xsl:value-of select="concat(properties/soap-url-host, properties/soap-url-path)" />
+    </xsl:attribute>
+      <!-- <xsl:namespace name="tns" select="'concat(properties/host, properties/path)'"/> -->
+
+      <wsdl:types>
+        <xsd:schema elementFormDefault="qualified">
+
+          <xsl:for-each select="properties/*[starts-with(name(), 'schema')]">
+            <xsl:copy-of select="node()" />
+          </xsl:for-each>
+
+        </xsd:schema>
+      </wsdl:types>
+
+      <wsdl:message name="request">
+        <wsdl:part name="in">
+          <xsl:attribute name="element">
+            <xsl:value-of select="properties/request-root-element" />
+          </xsl:attribute>
+        </wsdl:part>
+      </wsdl:message>
+      <wsdl:message name="response">
+        <wsdl:part name="out">
+          <xsl:attribute name="element">
+            <xsl:value-of select="properties/response-root-element" />
+          </xsl:attribute>
+        </wsdl:part>
+      </wsdl:message>
+
+      <wsdl:portType name="portType">
+        <wsdl:operation>
+          <xsl:attribute name="name">
+            <xsl:value-of select="properties/soap-operation" />
+          </xsl:attribute>
+
+          <wsdl:input message="tns:request" />
+          <wsdl:output message="tns:response" />
+        </wsdl:operation>
+      </wsdl:portType>
+
+      <wsdl:binding type="tns:portType">
+        <xsl:attribute name="name">
+          <xsl:value-of select="properties/soap-action" />
+        </xsl:attribute>
+
+        <soap:binding style="document"
+          transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <wsdl:operation>
+          <xsl:attribute name="name">
+            <xsl:value-of select="properties/soap-operation" />
+          </xsl:attribute>
+
+          <soap:operation soapAction="" style="document" />
+          <wsdl:input>
+            <xsl:attribute name="name">
+              <xsl:value-of select="concat(properties/soap-operation, 'Request')" />
+            </xsl:attribute>
+
+            <soap:body use="literal" />
+          </wsdl:input>
+          <wsdl:output>
+            <xsl:attribute name="name">
+              <xsl:value-of select="concat(properties/soap-operation, 'Response')" />
+            </xsl:attribute>
+
+            <soap:body use="literal" />
+          </wsdl:output>
+        </wsdl:operation>
+      </wsdl:binding>
+
+      <wsdl:service name="ServiceName">
+        <wsdl:port name="SOAPPort">
+          <xsl:attribute name="binding">
+            <xsl:value-of select="concat('tns:', properties/soap-action)" />
+          </xsl:attribute>
+
+          <soap:address>
+            <xsl:attribute name="location">
+              <xsl:value-of select="concat(properties/soap-url-host, properties/soap-url-path)" />
+            </xsl:attribute>
+          </soap:address>
+        </wsdl:port>
+      </wsdl:service>
+
+    </wsdl:definitions>
+
+  </xsl:template>
+</xsl:stylesheet>
+    ]]></xslt-template>
+  </xslt-wizard>
+  
+  <consume-connection class="jetty-embedded-connection">
+    <unique-id>Embedded Jetty Connection</unique-id>
+  </consume-connection>
+  <produce-connection class="null-connection">
+    <unique-id>NullConnection</unique-id>
+  </produce-connection>
+  <workflow-list>
+    <pooling-workflow>
+      <consumer class="jetty-message-consumer">
+        <unique-id>WebServiceConsumer</unique-id>
+        <destination class="configured-consume-destination">
+          <configured-thread-name>WebServiceConsumer</configured-thread-name>
+          <destination wizard-desc="Url path to access the web service" wizard-key="soap.url.path" wizard-label="Web Service Url Path" wizard-step="step1" wizard-type="String"></destination>
+          <filter-expression>GET,POST</filter-expression>
+        </destination>
+        <parameter-handler class="jetty-http-parameters-as-metadata"/>
+        <header-handler class="jetty-http-headers-as-metadata"/>
+      </consumer>
+      <service-collection class="service-list">
+        <unique-id>ServiceList</unique-id>
+        <services>
+          <branching-service-collection>
+            <unique-id>HttpMethodBranching</unique-id>
+            <services>
+              <metadata-value-branching-service>
+                <unique-id>CheckHttpMethod</unique-id>
+                <metadata-key>httpmethod</metadata-key>
+                <default-service-id>Get</default-service-id>
+                <value-matcher class="equals-value-matcher"/>
+                <metadata-to-service-id-mappings>
+                  <key-value-pair>
+                    <key>POST</key>
+                    <value>Post</value>
+                  </key-value-pair>
+                  <key-value-pair>
+                    <key>GET</key>
+                    <value>Get</value>
+                  </key-value-pair>
+                </metadata-to-service-id-mappings>
+              </metadata-value-branching-service>
+              <service-list>
+                <unique-id>Get</unique-id>
+                <services>
+                  <payload-from-metadata-service>
+                    <unique-id>ProvideWsdl</unique-id>
+                    <metadata-tokens/>
+                    <template wizard-desc="WSDL Content" wizard-key="soap.wsdl" wizard-label="Web Service Wsdl" wizard-step="step1" wizard-type="String" wizard-key-hidden="true"><![CDATA[ ]]></template>
+                  </payload-from-metadata-service>
+                </services>
+              </service-list>
+              <service-list>
+                <unique-id>Post</unique-id>
+                <services>
+                  <xml-transform-service>
+                    <unique-id>XmlSoapUnwrapper</unique-id>
+                    <url>http://localhost:8080/lookups/soap-unwrapper</url>
+                    <metadata-key>transformurl</metadata-key>
+                    <xml-transformer-factory class="xslt-transformer-factory">
+                      <transformer-factory-attributes/>
+                      <transformer-factory-features/>
+                    </xml-transformer-factory>
+                  </xml-transform-service>
+                  <xml-validation-service>
+                    <unique-id>XmlRequestValidator</unique-id>
+                    <validators>
+                      <xml-basic-validator/>
+                      <xml-schema-validator>
+                        <schema wizard-desc="Url to the request schema" wizard-key="schema.request" wizard-label="Request Schema" wizard-step="step2" wizard-type="String" wizard-order="2"></schema>
+                      </xml-schema-validator>
+                    </validators>
+                  </xml-validation-service>
+                  <service-list>
+                    <unique-id>DoService</unique-id>
+                      <!-- List of custom services to override -->
+                    <services/>
+                      <!-- End of List of custom services to override -->
+                  </service-list>
+                  <xml-validation-service>
+                    <unique-id>XmlResponseValidator</unique-id>
+                    <validators>
+                      <xml-basic-validator/>
+                      <xml-schema-validator>
+                        <schema wizard-desc="Url to the response schema" wizard-key="schema.response" wizard-label="Response Schema" wizard-step="step2" wizard-type="String" wizard-order="4"></schema>
+                      </xml-schema-validator>
+                    </validators>
+                  </xml-validation-service>
+                  <xml-transform-service>
+                    <unique-id>XmlSoapWrapper</unique-id>
+                    <url>http://localhost:8080/lookups/soap-wrapper</url>
+                    <metadata-key>transformurl</metadata-key>
+                    <xml-transformer-factory class="xslt-transformer-factory">
+                      <transformer-factory-attributes/>
+                      <transformer-factory-features/>
+                    </xml-transformer-factory>
+                  </xml-transform-service>
+                </services>
+              </service-list>
+            </services>
+            <first-service-id>CheckHttpMethod</first-service-id>
+          </branching-service-collection>
+          <standalone-producer>
+            <unique-id>SendResponse</unique-id>
+            <connection class="null-connection">
+              <unique-id>modest-dubinsky</unique-id>
+            </connection>
+            <producer class="jetty-standard-response-producer">
+              <unique-id>ResponseProducer</unique-id>
+              <status-provider class="http-configured-status">
+                <status>OK_200</status>
+                <text>The Wsdl</text>
+              </status-provider>
+              <response-header-provider class="jetty-no-response-headers"/>
+              <content-type-provider class="http-configured-content-type-provider">
+                <mime-type>application/xml</mime-type>
+              </content-type-provider>
+              <send-payload>true</send-payload>
+            </producer>
+          </standalone-producer>
+        </services>
+      </service-collection>
+      <producer class="null-message-producer">
+        <unique-id>NullMessageProducer</unique-id>
+      </producer>
+      <send-events>false</send-events>
+      <produce-exception-handler class="null-produce-exception-handler"/>
+      <unique-id>WebServiceWorkflow</unique-id>
+      <message-metrics-interceptor>
+        <unique-id>DailyWebServiceCall</unique-id>
+        <timeslice-duration>
+          <unit>MINUTES</unit>
+          <interval>5</interval>
+        </timeslice-duration>
+        <timeslice-history-count>12</timeslice-history-count>
+      </message-metrics-interceptor>
+      <in-flight-workflow-interceptor>
+        <unique-id>WebServiceInFlight</unique-id>
+      </in-flight-workflow-interceptor>
+      <jetty-pooling-workflow-interceptor>
+        <unique-id>distracted-hypatia</unique-id>
+      </jetty-pooling-workflow-interceptor>
+    </pooling-workflow>
+    <pooling-workflow>
+      <consumer class="jetty-message-consumer">
+        <unique-id>/lookups/soap-wrapper</unique-id>
+        <destination class="configured-consume-destination">
+          <configured-thread-name>Wrapper</configured-thread-name>
+          <destination>/lookups/soap-wrapper</destination>
+          <filter-expression>GET</filter-expression>
+        </destination>
+        <parameter-handler class="jetty-http-parameters-as-metadata"/>
+        <header-handler class="jetty-http-ignore-headers"/>
+      </consumer>
+      <service-collection class="service-list">
+        <unique-id>gigantic-yonath</unique-id>
+        <services>
+          <payload-from-metadata-service>
+            <unique-id>XSLTSoapWrapper</unique-id>
+            <metadata-tokens/>
+            <template><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output indent="yes"/>
+    <xsl:strip-space elements="*"/>
+
+    <xsl:template match="/">
+        <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+            <soapenv:Header/>
+            <soapenv:Body>
+                <xsl:copy-of select="*"/>
+            </soapenv:Body>
+        </soapenv:Envelope>
+    </xsl:template>
+</xsl:stylesheet>]]></template>
+          </payload-from-metadata-service>
+          <standalone-producer>
+            <unique-id>SendResponse</unique-id>
+            <connection class="null-connection">
+              <unique-id>modest-dubinsky</unique-id>
+            </connection>
+            <producer class="jetty-standard-response-producer">
+              <unique-id>ResponseProducer</unique-id>
+              <status-provider class="http-configured-status">
+                <status>OK_200</status>
+                <text>The Wsdl</text>
+              </status-provider>
+              <response-header-provider class="jetty-no-response-headers"/>
+              <content-type-provider class="http-configured-content-type-provider">
+                <mime-type>application/xml</mime-type>
+              </content-type-provider>
+              <send-payload>true</send-payload>
+            </producer>
+          </standalone-producer>
+        </services>
+      </service-collection>
+      <producer class="null-message-producer">
+        <unique-id>NullMessageProducer</unique-id>
+      </producer>
+      <send-events>false</send-events>
+      <produce-exception-handler class="null-produce-exception-handler"/>
+      <unique-id>XSLTSoapWrapper</unique-id>
+      <message-metrics-interceptor>
+        <unique-id>DailyXSLTSoapWrapperCall</unique-id>
+        <timeslice-duration>
+          <unit>MINUTES</unit>
+          <interval>5</interval>
+        </timeslice-duration>
+        <timeslice-history-count>12</timeslice-history-count>
+      </message-metrics-interceptor>
+      <in-flight-workflow-interceptor>
+        <unique-id>XSLTSoapWrapperInFlight</unique-id>
+      </in-flight-workflow-interceptor>
+      <jetty-pooling-workflow-interceptor>
+        <unique-id>distracted-hypatia</unique-id>
+      </jetty-pooling-workflow-interceptor>
+    </pooling-workflow>
+    <pooling-workflow>
+      <consumer class="jetty-message-consumer">
+        <unique-id>/lookups/soap-unwrapper</unique-id>
+        <destination class="configured-consume-destination">
+          <configured-thread-name>Unwrapper</configured-thread-name>
+          <destination>/lookups/soap-unwrapper</destination>
+          <filter-expression>GET</filter-expression>
+        </destination>
+        <parameter-handler class="jetty-http-parameters-as-metadata"/>
+        <header-handler class="jetty-http-ignore-headers"/>
+      </consumer>
+      <service-collection class="service-list">
+        <unique-id>gigantic-yonath</unique-id>
+        <services>
+          <payload-from-metadata-service>
+            <unique-id>XSLTSoapUnwrapper</unique-id>
+            <metadata-tokens/>
+            <template><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <xsl:output indent="yes" />
+
+  <xsl:template match="@* | node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()" />
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="soapenv:*">
+    <xsl:apply-templates select="@* | node()" />
+  </xsl:template>
+
+</xsl:stylesheet>]]></template>
+          </payload-from-metadata-service>
+          <standalone-producer>
+            <unique-id>SendResponse</unique-id>
+            <connection class="null-connection">
+              <unique-id>modest-dubinsky</unique-id>
+            </connection>
+            <producer class="jetty-standard-response-producer">
+              <unique-id>ResponseProducer</unique-id>
+              <status-provider class="http-configured-status">
+                <status>OK_200</status>
+                <text>The Wsdl</text>
+              </status-provider>
+              <response-header-provider class="jetty-no-response-headers"/>
+              <content-type-provider class="http-configured-content-type-provider">
+                <mime-type>application/xml</mime-type>
+              </content-type-provider>
+              <send-payload>true</send-payload>
+            </producer>
+          </standalone-producer>
+        </services>
+      </service-collection>
+      <producer class="null-message-producer">
+        <unique-id>NullMessageProducer</unique-id>
+      </producer>
+      <send-events>false</send-events>
+      <produce-exception-handler class="null-produce-exception-handler"/>
+      <unique-id>XsltSoapUnwrapper</unique-id>
+      <message-metrics-interceptor>
+        <unique-id>DailyXsltSoapUnwrapperCall</unique-id>
+        <timeslice-duration>
+          <unit>MINUTES</unit>
+          <interval>5</interval>
+        </timeslice-duration>
+        <timeslice-history-count>12</timeslice-history-count>
+      </message-metrics-interceptor>
+      <in-flight-workflow-interceptor>
+        <unique-id>XsltSoapUnwrapperInFlight</unique-id>
+      </in-flight-workflow-interceptor>
+      <jetty-pooling-workflow-interceptor>
+        <unique-id>distracted-hypatia</unique-id>
+      </jetty-pooling-workflow-interceptor>
+    </pooling-workflow>
+  </workflow-list>
+  <unique-id wizard-desc="Channel Unique ID" wizard-key="channel.uniqueId" wizard-label="Channel Unique ID" wizard-step="step1" wizard-type="String">WebServiceChannel</unique-id>
+  <auto-start>true</auto-start>
+</channel>
