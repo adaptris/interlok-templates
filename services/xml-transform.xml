@@ -13,7 +13,6 @@
          wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
 >
  <url wizard-key="Transform URL" wizard-desc="What XML Transform do you wish to apply" wizard-step="transform"></url>
- <use-metadata-as-stylesheet-parameters>true</use-metadata-as-stylesheet-parameters>
  <output-message-encoding>UTF-8</output-message-encoding>
  <xml-transformer-factory class="xslt-transformer-factory"/>
 </xml-transform-service>
