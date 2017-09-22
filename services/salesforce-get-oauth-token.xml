@@ -1,49 +1,24 @@
 <!-- Use by the UI salesforce config page -->
-<service-list              
-         tmpl-alias="Service List" 
-         tmpl-alias-value="service-list" 
+<get-oauth-token              
+         tmpl-alias="Get OAuth Token" 
+         tmpl-alias-value="get-oauth-token" 
          tmpl-author="Adaptris" 
-         tmpl-class-name="com.adaptris.core.ServiceList" 
+         tmpl-class-name="com.adaptris.core.http.oauth.GetOauthToken" 
          tmpl-created="2017-09-18T10:00:00" 
-         tmpl-desc="Request to salesforce api" 
-         tmpl-keywords="salesforce" 
-         tmpl-name="Salesforce Standalone Requestor" 
+         tmpl-desc="Get salesforce OAuth authentication token" 
+         tmpl-keywords="oauth salesforce" 
+         tmpl-name="Salesforce Get OAuth Token" 
          tmpl-target-version="3.6.0-RELEASE" 
-         tmpl-title="Request to salesforce api"
+         tmpl-title="Get Salesforce OAuth Authentication Token"
          tmpl-type="service" tmpl-wizard="true"
-         wizard-request-order="0" wizard-request-desc="Salesforce Request"
+         wizard-account-order="0" wizard-account-desc="Salesforce Account"
 >
-  <unique-id wizard-key="service.uid" wizard-desc="Service unique id" wizard-step="request" wizard-order="0" wizard-type="string"></unique-id>
-  <services>
-    <standalone-requestor>
-      <unique-id wizard-key="service.uid" wizard-desc="Service unique id" wizard-step="request" wizard-order="0" wizard-type="string"></unique-id>
-      <continue-on-fail>true</continue-on-fail>
-      <connection class="null-connection">
-        <unique-id>null-connection</unique-id>
-      </connection>
-      <producer class="standard-http-producer">
-        <unique-id>standard-http-producer</unique-id>
-        <destination class="configured-destination">
-          <destination wizard-key="request.url" wizard-desc="Request URL" wizard-step="request" wizard-order="1" wizard-type="string"></destination>
-        </destination>
-        <method-provider class="http-configured-request-method">
-          <method wizard-key="request.method" wizard-desc="Request method" wizard-step="request" wizard-order="2" wizard-type="string"></method>
-        </method-provider>
-        <content-type-provider class="http-configured-content-type-provider">
-          <mime-type>application/json</mime-type>
-        </content-type-provider>
-        <response-header-handler class="http-response-headers-as-metadata"/>
-        <request-header-provider class="http-metadata-request-headers">
-          <filter class="regex-metadata-filter">
-            <include-pattern>^Authorization.*</include-pattern>
-          </filter>
-        </request-header-provider>
-        <authenticator class="http-no-authentication"/>
-      </producer>
-      <reply-timeout>
-        <unit>SECONDS</unit>
-        <interval>60</interval>
-      </reply-timeout>
-    </standalone-requestor>
-  </services>
-</service-list>
+  <unique-id>Salesforce Get OAuth Token</unique-id>
+  <token-key>Authorization</token-key>
+  <access-token-builder class="salesforce-access-token">
+    <username wizard-key="username" wizard-desc="Salesforce username" wizard-step="account" wizard-order="0" wizard-type="string"></username>
+    <password wizard-key="password" wizard-desc="Salesforce password" wizard-step="account" wizard-order="1" wizard-type="password"></password>
+    <consumer-key wizard-key="consumer.key" wizard-desc="Salesforce consumer key" wizard-step="account" wizard-order="2" wizard-type="string"></consumer-key>
+    <consumer-secret wizard-key="consumer.secret" wizard-desc="Salesforce consumer secret" wizard-step="account" wizard-type="password" wizard-order="3"></consumer-secret>
+  </access-token-builder>
+</get-oauth-token>
