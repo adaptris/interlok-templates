@@ -20,5 +20,6 @@
     <password wizard-key="password" wizard-desc="Salesforce password" wizard-step="account" wizard-order="1" wizard-type="password"></password>
     <consumer-key wizard-key="consumer.key" wizard-desc="Salesforce consumer key" wizard-step="account" wizard-order="2" wizard-type="string"></consumer-key>
     <consumer-secret wizard-key="consumer.secret" wizard-desc="Salesforce consumer secret" wizard-step="account" wizard-type="password" wizard-order="3"></consumer-secret>
+    <token-url wizard-key="token.url" wizard-desc="Salesforce token URL" wizard-step="account" wizard-type="string" wizard-order="4"></token-url>
   </access-token-builder>
 </get-oauth-token>
