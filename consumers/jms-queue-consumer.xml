@@ -13,9 +13,9 @@
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
 >
   <destination class="configured-consume-destination">
-    <destination wizard-key="JMSTopic"
-                 wizard-label="JMS Topic"
-                 wizard-desc="The JMS Topic"
+    <destination wizard-key="JMSQueue"
+                 wizard-label="JMS Queue"
+                 wizard-desc="The JMS Queue"
                  wizard-step="jms">
     </destination>
   </destination>
