@@ -16,7 +16,6 @@
     <destination wizard-key="JMSQueue"
                  wizard-label="JMS Queue"
                  wizard-desc="The JMS Queue"
-                 wizard-step="jms">
-    </destination>
+                 wizard-step="jms"></destination>
   </destination>
 </jms-queue-consumer>

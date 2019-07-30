@@ -16,7 +16,6 @@
     <destination wizard-key="JMSTopic"
                  wizard-label="JMS Topic"
                  wizard-desc="The JMS Topic"
-                 wizard-step="jms">
-    </destination>
+                 wizard-step="jms"></destination>
   </destination>
 </jms-topic-consumer>
