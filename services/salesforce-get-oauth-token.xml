@@ -14,7 +14,9 @@
          wizard-account-order="0" wizard-account-desc="Salesforce Account"
 >
   <unique-id>Salesforce Get OAuth Token</unique-id>
-  <token-key>Authorization</token-key>
+  <access-token-writer class="oauth-access-token-to-metadata">
+    <token-key>Authorization</token-key>
+  </access-token-writer>
   <access-token-builder class="salesforce-access-token">
     <username wizard-key="username" wizard-desc="Salesforce username" wizard-step="account" wizard-order="0" wizard-type="string"></username>
     <password wizard-key="password" wizard-desc="Salesforce password" wizard-step="account" wizard-order="1" wizard-type="password"></password>

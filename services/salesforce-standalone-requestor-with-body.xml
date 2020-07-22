@@ -15,11 +15,11 @@
 >
   <unique-id wizard-key="service.uid" wizard-desc="Service unique id" wizard-step="request" wizard-order="0" wizard-type="string"></unique-id>
   <services>
-    <payload-from-metadata-service>
+    <payload-from-template>
       <unique-id>Payload</unique-id>
       <metadata-tokens/>
       <template wizard-key="request.body" wizard-desc="Request body" wizard-step="request" wizard-order="0" wizard-type="string"></template>
-    </payload-from-metadata-service>
+    </payload-from-template>
     <standalone-requestor>
       <unique-id wizard-key="service.uid" wizard-desc="Service unique id" wizard-step="request" wizard-order="3" wizard-type="string"></unique-id>
       <continue-on-fail>true</continue-on-fail>
