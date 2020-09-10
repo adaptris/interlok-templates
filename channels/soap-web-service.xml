@@ -153,11 +153,8 @@
     <pooling-workflow>
       <consumer class="jetty-message-consumer">
         <unique-id>WebServiceConsumer</unique-id>
-        <destination class="configured-consume-destination">
-          <configured-thread-name>WebServiceConsumer</configured-thread-name>
-          <destination wizard-desc="Url path to access the web service" wizard-key="soap.url.path" wizard-label="Web Service Url Path" wizard-step="step1" wizard-type="String"></destination>
-          <filter-expression>GET,POST</filter-expression>
-        </destination>
+        <path wizard-desc="Url path to access the web service" wizard-key="soap.url.path" wizard-label="Web Service Url Path" wizard-step="step1" wizard-type="String"></path>
+        <methods>GET,POST</methods>
         <parameter-handler class="jetty-http-parameters-as-metadata"/>
         <header-handler class="jetty-http-headers-as-metadata"/>
       </consumer>
@@ -186,11 +183,11 @@
               <service-list>
                 <unique-id>Get</unique-id>
                 <services>
-                  <payload-from-metadata-service>
+                  <payload-from-template>
                     <unique-id>ProvideWsdl</unique-id>
                     <metadata-tokens/>
                     <template wizard-desc="WSDL Content" wizard-key="soap.wsdl" wizard-label="Web Service Wsdl" wizard-step="step1" wizard-type="String" wizard-key-hidden="true"><![CDATA[ ]]></template>
-                  </payload-from-metadata-service>
+                  </payload-from-template>
                 </services>
               </service-list>
               <service-list>
@@ -209,9 +206,9 @@
                     <unique-id>XmlRequestValidator</unique-id>
                     <validators>
                       <xml-basic-validator/>
-                      <xml-schema-validator>
+                      <basic-xml-schema-validator>
                         <schema wizard-desc="Url to the request schema" wizard-key="schema.request" wizard-label="Request Schema" wizard-step="step2" wizard-type="String" wizard-order="2"></schema>
-                      </xml-schema-validator>
+                      </basic-xml-schema-validator>
                     </validators>
                   </xml-validation-service>
                   <service-list>
@@ -224,9 +221,9 @@
                     <unique-id>XmlResponseValidator</unique-id>
                     <validators>
                       <xml-basic-validator/>
-                      <xml-schema-validator>
+                      <basic-xml-schema-validator>
                         <schema wizard-desc="Url to the response schema" wizard-key="schema.response" wizard-label="Response Schema" wizard-step="step2" wizard-type="String" wizard-order="4"></schema>
-                      </xml-schema-validator>
+                      </basic-xml-schema-validator>
                     </validators>
                   </xml-validation-service>
                   <xml-transform-service>
@@ -287,18 +284,15 @@
     <pooling-workflow>
       <consumer class="jetty-message-consumer">
         <unique-id>/lookups/soap-wrapper</unique-id>
-        <destination class="configured-consume-destination">
-          <configured-thread-name>Wrapper</configured-thread-name>
-          <destination>/lookups/soap-wrapper</destination>
-          <filter-expression>GET</filter-expression>
-        </destination>
+        <path>/lookups/soap-wrapper</path>
+        <methods>GET</methods>
         <parameter-handler class="jetty-http-parameters-as-metadata"/>
         <header-handler class="jetty-http-ignore-headers"/>
       </consumer>
       <service-collection class="service-list">
         <unique-id>gigantic-yonath</unique-id>
         <services>
-          <payload-from-metadata-service>
+          <payload-from-template>
             <unique-id>XSLTSoapWrapper</unique-id>
             <metadata-tokens/>
             <template><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -315,7 +309,7 @@
         </soapenv:Envelope>
     </xsl:template>
 </xsl:stylesheet>]]></template>
-          </payload-from-metadata-service>
+          </payload-from-template>
           <standalone-producer>
             <unique-id>SendResponse</unique-id>
             <connection class="null-connection">
@@ -360,18 +354,15 @@
     <pooling-workflow>
       <consumer class="jetty-message-consumer">
         <unique-id>/lookups/soap-unwrapper</unique-id>
-        <destination class="configured-consume-destination">
-          <configured-thread-name>Unwrapper</configured-thread-name>
-          <destination>/lookups/soap-unwrapper</destination>
-          <filter-expression>GET</filter-expression>
-        </destination>
+        <path>/lookups/soap-unwrapper</path>
+        <methods>GET</methods>
         <parameter-handler class="jetty-http-parameters-as-metadata"/>
         <header-handler class="jetty-http-ignore-headers"/>
       </consumer>
       <service-collection class="service-list">
         <unique-id>gigantic-yonath</unique-id>
         <services>
-          <payload-from-metadata-service>
+          <payload-from-template>
             <unique-id>XSLTSoapUnwrapper</unique-id>
             <metadata-tokens/>
             <template><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -391,7 +382,7 @@
   </xsl:template>
 
 </xsl:stylesheet>]]></template>
-          </payload-from-metadata-service>
+          </payload-from-template>
           <standalone-producer>
             <unique-id>SendResponse</unique-id>
             <connection class="null-connection">

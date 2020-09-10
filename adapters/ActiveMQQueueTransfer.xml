@@ -39,9 +39,7 @@
         <standalone-producer>
           <producer class="fs-producer">
             <encoder class="mime-encoder"/>
-            <destination class="configured-produce-destination">
-              <destination>./messages/bad</destination>
-            </destination>
+			<base-directory-url>./messages/bad</base-directory-url>
             <create-dirs>true</create-dirs>
           </producer>
         </standalone-producer>
@@ -54,10 +52,7 @@
         <encoder class="mime-encoder">
           <retain-unique-id>true</retain-unique-id>
         </encoder>
-        <destination class="configured-consume-destination">
-          <configured-thread-name>MESSAGE_RETRY</configured-thread-name>
-          <destination>./messages/retry</destination>
-        </destination>
+		<base-directory-url>./messages/retry</base-directory-url>
         <poller class="quartz-cron-poller">
           <cron-expression>0 */2 * * * ?</cron-expression>
         </poller>
@@ -79,9 +74,7 @@
           <unique-id>JmsWorkflow</unique-id>        
           <consumer class="jms-queue-consumer">
             <unique-id>JmsQueueConsumer</unique-id>
-            <destination class="configured-consume-destination">
-              <destination wizard-key="consumeQ" wizard-label="JMS Consume Queue" wizard-desc="Active MQ JMS Consume Queue" wizard-type="String" wizard-step="consume"></destination>
-            </destination>
+            <queue wizard-key="consumeQ" wizard-label="JMS Consume Queue" wizard-desc="Active MQ JMS Consume Queue" wizard-type="String" wizard-step="consume"></queue>
             <acknowledge-mode>CLIENT_ACKNOWLEDGE</acknowledge-mode>
             <message-translator class="auto-convert-message-translator"/>
           </consumer>
@@ -97,9 +90,7 @@
             </services>
           </service-collection>
           <producer class="jms-queue-producer">
-            <destination class="configured-produce-destination">
-              <destination wizard-key="produceQ" wizard-label="Jms Produce Queue" wizard-desc="Active MQ Jms Produce Queue" wizard-type="String" wizard-step="produce"></destination>
-            </destination>
+            <queue wizard-key="produceQ" wizard-label="Jms Produce Queue" wizard-desc="Active MQ Jms Produce Queue" wizard-type="String" wizard-step="produce"></queue>
             <acknowledge-mode>CLIENT_ACKNOWLEDGE</acknowledge-mode>
             <message-translator class="text-message-translator"/>
             <delivery-mode>PERSISTENT</delivery-mode>

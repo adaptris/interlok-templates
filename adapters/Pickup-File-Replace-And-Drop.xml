@@ -25,9 +25,7 @@
           <connection class="null-connection"/>
           <producer class="fs-producer">
             <encoder class="mime-encoder"/>
-            <destination class="configured-produce-destination">
-              <destination>./messages/bad</destination>
-            </destination>
+			<base-directory-url>./messages/bad</base-directory-url>
             <create-dirs>true</create-dirs>
           </producer>
         </standalone-producer>
@@ -41,10 +39,7 @@
         <encoder class="mime-encoder">
           <retain-unique-id>true</retain-unique-id>
         </encoder>
-        <destination class="configured-consume-destination">
-          <configured-thread-name>MESSAGE_RETRY</configured-thread-name>
-          <destination>./messages/retry</destination>
-        </destination>
+		<base-directory-url>./messages/retry</base-directory-url>
         <poller class="quartz-cron-poller">
           <cron-expression>0 */2 * * * ?</cron-expression>
         </poller>
@@ -61,9 +56,9 @@
           <unique-id>PickupReplaceAndDrop</unique-id>
           <consumer class="fs-consumer">
             <unique-id>PickupFile</unique-id>
-            <destination class="configured-consume-destination">
-              <destination wizard-key="pickupLocation" wizard-desc="Location where to pick up the file" wizard-step="location"></destination>
-            </destination>
+			<base-directory-url wizard-key="pickupDirectoryUrl"
+								wizard-desc="Location URL where to pick up the file"
+								wizard-step="filesystem"></base-directory-url>
             <poller class="fixed-interval-poller">
               <poll-interval>
                 <unit>MINUTES</unit>
@@ -90,9 +85,9 @@
           </service-collection>
           <producer class="fs-producer">
             <unique-id>DropFile</unique-id>
-            <destination class="configured-produce-destination">
-              <destination wizard-key="dropLocation" wizard-desc="Location where to drop the file" wizard-step="location"></destination>
-            </destination>
+			<base-directory-url wizard-key="dropDirectoryUrl"
+								wizard-desc="Location URL where to drop the file"
+								wizard-step="filesystem"></base-directory-url>
             <create-dirs>true</create-dirs>
           </producer>
           <message-metrics-interceptor>

@@ -23,13 +23,11 @@
   <workflow-list>
     <standard-workflow>
       <consumer class="jms-topic-consumer">
-        <destination class="configured-consume-destination">
-           <destination wizard-key="JMSTOpic"
-                        wizard-label="JMS Topic"
-                        wizard-desc="The JMS Topic"
-                        wizard-step="jms">
-           </destination>
-        </destination>
+        <topic wizard-key="JMSTOpic"
+               wizard-label="JMS Topic"
+               wizard-desc="The JMS Topic"
+               wizard-step="jms">
+        </topic>
       </consumer>
       <service-collection class="service-list">
         <services>
@@ -37,9 +35,9 @@
       </service-collection>
       <producer class="fs-producer">
         <unique-id>DropFile</unique-id>
-        <destination class="configured-produce-destination">
-          <destination wizard-key="dropLocation" wizard-desc="Location where to drop the file" wizard-step="filesystem"></destination>
-        </destination>
+        <base-directory-url wizard-key="dropDirectoryUrl"
+							wizard-desc="Location URL where to drop the file"
+							wizard-step="filesystem"></base-directory-url>
         <create-dirs>true</create-dirs>
       </producer>
     </standard-workflow>

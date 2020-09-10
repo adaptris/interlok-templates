@@ -8,7 +8,7 @@
          tmpl-desc="Accept a HTTP Request and send a response. Any exception sends a 500 server error with no data." 
          tmpl-keywords="HTTP Request Response Responder" 
          tmpl-name="Handle HTTP Request" 
-         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-target-version="3.11.0-RELEASE" 
          tmpl-title="Handle HTTP Request Channel Template" 
          tmpl-type="channel" tmpl-wizard="true"
          wizard-http-order="1" wizard-http-desc="Configure the HTTP Consumer"
@@ -34,10 +34,7 @@
      <pooling-workflow>
        <jetty-pooling-workflow-interceptor/>
        <consumer class="jetty-message-consumer">
-         <destination class="configured-consume-destination">
-           <destination wizard-key="URL" wizard-desc="The URL for incoming requests" wizard-step="http"></destination>
-           <configured-thread-name wizard-key="URL" wizard-step="http"></configured-thread-name>
-         </destination>
+	     <path wizard-key="Path" wizard-desc="The URL path for incoming requests" wizard-step="http"></path>
        </consumer>
        <service-collection class="service-list">
          <services>

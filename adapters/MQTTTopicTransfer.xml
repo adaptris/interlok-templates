@@ -41,9 +41,7 @@
         <standalone-producer>
           <producer class="fs-producer">
             <encoder class="mime-encoder"/>
-            <destination class="configured-produce-destination">
-              <destination>./messages/bad</destination>
-            </destination>
+			<base-directory-url>./messages/bad</base-directory-url>
             <create-dirs>true</create-dirs>
           </producer>
         </standalone-producer>
@@ -56,10 +54,7 @@
         <encoder class="mime-encoder">
           <retain-unique-id>true</retain-unique-id>
         </encoder>
-        <destination class="configured-consume-destination">
-          <configured-thread-name>MESSAGE_RETRY</configured-thread-name>
-          <destination>./messages/retry</destination>
-        </destination>
+		<base-directory-url>./messages/retry</base-directory-url>
         <poller class="quartz-cron-poller">
           <cron-expression>0 */2 * * * ?</cron-expression>
         </poller>
@@ -82,9 +77,7 @@
               <default-char-encoding>utf-8</default-char-encoding>
             </message-factory>
             <unique-id>MQTTConsumer</unique-id>
-            <destination class="configured-consume-destination">
-              <destination wizard-desc="MQTT Consume Topic" wizard-key="configuredConsumeDestination.destination" wizard-label="MQTT Consume Topic" wizard-step="step2" wizard-type="String"></destination>
-            </destination>
+            <topic wizard-desc="MQTT Consume Topic" wizard-key="configuredConsumeDestination.destination" wizard-label="MQTT Consume Topic" wizard-step="step2" wizard-type="String"></topic>
             <time-to-wait>
               <unit>SECONDS</unit>
               <interval>30</interval>
@@ -99,9 +92,7 @@
               <default-char-encoding>utf-8</default-char-encoding>
             </message-factory>
             <unique-id>MQTTProducer</unique-id>
-            <destination class="configured-produce-destination">
-              <destination wizard-desc="MQTT Produce Topic" wizard-key="configuredProduceDestination.destination" wizard-label="MQTT Produce Topic" wizard-step="step3" wizard-type="String"></destination>
-            </destination>
+            <topic wizard-desc="MQTT Produce Topic" wizard-key="configuredProduceDestination.destination" wizard-label="MQTT Produce Topic" wizard-step="step3" wizard-type="String"></topic>
             <qos>1</qos>
             <retained>false</retained>
             <time-to-wait>

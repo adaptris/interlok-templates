@@ -23,11 +23,9 @@
       </connection>
       <producer class="standard-http-producer">
         <unique-id>standard-http-producer</unique-id>
-        <destination class="configured-destination">
-          <destination wizard-key="request.url" wizard-desc="Request URL" wizard-step="request" wizard-order="1" wizard-type="string"></destination>
-        </destination>
+        <url wizard-key="request.url" wizard-desc="Request URL" wizard-step="request" wizard-order="1" wizard-type="string"></url>
         <method-provider class="http-configured-request-method">
-          <method wizard-key="request.method" wizard-desc="Request method" wizard-step="request" wizard-order="2" wizard-type="string"></method>
+          <method wizard-key="request.method" wizard-desc="Request method. It should be one of CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, PUT, POST, TRACE." wizard-step="request" wizard-order="2" wizard-type="string"></method>
         </method-provider>
         <content-type-provider class="http-configured-content-type-provider">
           <mime-type>application/json</mime-type>

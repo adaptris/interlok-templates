@@ -8,7 +8,7 @@
          tmpl-desc="Consume from a JMS Queue and write to File System" 
          tmpl-keywords="File System JMS Queue" 
          tmpl-name="JMS Queue to Filesystem" 
-         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-target-version="3.11.0-RELEASE" 
          tmpl-title="JMS Queue to Filesystem Channel Template" 
          tmpl-type="channel" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
@@ -23,13 +23,11 @@
   <workflow-list>
     <standard-workflow>
       <consumer class="jms-queue-consumer">
-        <destination class="configured-consume-destination">
-           <destination wizard-key="JMSQueue"
-                        wizard-label="JMS Queue"
-                        wizard-desc="The JMS Queue"
-                        wizard-step="jms">
-           </destination>
-        </destination>
+        <queue wizard-key="JMSQueue"
+               wizard-label="JMS Queue"
+               wizard-desc="The JMS Queue"
+               wizard-step="jms">
+        </queue>
       </consumer>
       <service-collection class="service-list">
         <services>
@@ -37,9 +35,9 @@
       </service-collection>
       <producer class="fs-producer">
         <unique-id>DropFile</unique-id>
-        <destination class="configured-produce-destination">
-          <destination wizard-key="dropLocation" wizard-desc="Location where to drop the file" wizard-step="filesystem"></destination>
-        </destination>
+        <base-directory-url wizard-key="dropDirectoryUrl"
+							wizard-desc="Location URL where to drop the file"
+							wizard-step="filesystem"></base-directory-url>
         <create-dirs>true</create-dirs>
       </producer>
     </standard-workflow>

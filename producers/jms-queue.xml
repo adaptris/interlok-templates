@@ -8,18 +8,15 @@
          tmpl-desc="Produce a message to a JMS Queue" 
          tmpl-keywords="JMS Queue Producer" 
          tmpl-name="JMS Queue Producer" 
-         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-target-version="3.11.0-RELEASE" 
          tmpl-title="JMS Queue Producer Template"           
          tmpl-type="producer" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Producer"
 >
-
-    <destination class="configured-produce-destination">
-       <destination wizard-key="JMSQueue"
-                    wizard-label="JMS Queue"
-                    wizard-desc="The JMS Queue"
-                    wizard-step="jms"></destination>
-    </destination>
+    <queue wizard-key="JMSQueue"
+                 wizard-label="JMS Queue"
+                 wizard-desc="The JMS Queue"
+                 wizard-step="jms"></queue>
     <delivery-mode>PERSISTENT</delivery-mode>
     <message-translator class="text-message-translator"/>
 </jms-queue-producer>

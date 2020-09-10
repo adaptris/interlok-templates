@@ -8,7 +8,7 @@
          tmpl-desc="Pickup from Filesystem and send to JMS" 
          tmpl-keywords="File System JMS Queue" 
          tmpl-name="Filesystem To JMS Queue" 
-         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-target-version="3.11.0-RELEASE" 
          tmpl-title="Filesystem To JMS Queue Channel Template" 
          tmpl-type="channel" tmpl-wizard="true"
          wizard-filesystem-order="0" wizard-filesystem-desc="Configure the pickup"
@@ -19,16 +19,14 @@
     <lookup-name wizard-key="JmsSharedConnection"
                  wizard-label="JMS Connection ID"
                  wizard-desc="The ID of the JMS connection in the shared connections list"
-                 wizard-step="jms">hub-jms-connection</lookup-name>
+                 wizard-step="jms">jms-connection</lookup-name>
   </produce-connection>
   <workflow-list>
     <standard-workflow>
       <consumer class="fs-consumer">
-        <destination class="configured-consume-destination">
-          <destination wizard-key="pickupLocation"
-                       wizard-desc="Location where to pick up the file"
-                       wizard-step="filesystem"></destination>
-        </destination>
+        <base-directory-url wizard-key="pickupDirectoryUrl"
+							wizard-desc="Location URL where to pick up the file"
+							wizard-step="filesystem"></base-directory-url>
         <poller class="fixed-interval-poller">
           <poll-interval>
             <unit>SECONDS</unit>
@@ -45,13 +43,11 @@
         </services>
       </service-collection>
       <producer class="jms-queue-producer">
-        <destination class="configured-produce-destination">
-           <destination wizard-key="JMSQueue"
-                        wizard-label="JMS Queue"
-                        wizard-desc="The JMS Queue"
-                        wizard-step="jms">
-           </destination>
-        </destination>
+        <queue wizard-key="JMSQueue"
+               wizard-label="JMS Queue"
+               wizard-desc="The JMS Queue"
+               wizard-step="jms">
+        </queue>
         <delivery-mode>PERSISTENT</delivery-mode>
         <message-translator class="text-message-translator"/>
       </producer>

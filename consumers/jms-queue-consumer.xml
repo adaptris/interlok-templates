@@ -7,7 +7,7 @@
          tmpl-desc="Consume a message from a JMS Queue" 
          tmpl-keywords="JMS Queue Consumer" 
          tmpl-name="JMS Queue Consumer" 
-         tmpl-target-version="3.1.0-RELEASE" 
+         tmpl-target-version="3.11.0-RELEASE" 
          tmpl-title="JMS Queue Consumer Template"                     
          tmpl-type="consumer" tmpl-wizard="true"
          wizard-jms-order="0" wizard-jms-desc="Configure the JMS Consumer"
@@ -18,4 +18,8 @@
                  wizard-desc="The JMS Queue"
                  wizard-step="jms"></destination>
   </destination>
+  <queue wizard-key="JMSQueue"
+                 wizard-label="JMS Queue"
+                 wizard-desc="The JMS Queue"
+                 wizard-step="jms"></queue>
 </jms-queue-consumer>
