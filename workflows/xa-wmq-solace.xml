@@ -1,0 +1,77 @@
+<standard-workflow
+  tmpl-author="Adaptris" 
+  tmpl-class-name="com.adaptris.core.StandardWorkflow" 
+  tmpl-created="2021-04-22T10:00:00" 
+  tmpl-desc="JMS bridging between WebsphereMQ and Solace using XA" 
+  tmpl-keywords="Solace WebsphereMQ XA JMS" 
+  tmpl-name="XA-WebsphereMQ-Solace" 
+  tmpl-target-version="4.0.0-RELEASE" 
+  tmpl-title="JMS bridging between WebsphereMQ and Solace using XA" 
+  tmpl-type="workflow" tmpl-wizard="true"
+  wizard-wmq-to-solace-order="2" wizard-wmq-to-solace-desc="WebsphereMQ to Solace"
+>
+  <xslt-wizard>
+    <!-- In absence of other way of doing it, we use the xslt-wizard tags to set the value of Generate unique identifier fields to false in the UI wizard -->
+    <xslt-template><![CDATA[<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"></xsl:stylesheet>]]></xslt-template>
+  </xslt-wizard>
+  <consumer class="xa-jms-consumer">
+	<unique-id>xa_wmq_consumer</unique-id>
+	<max-batch>250</max-batch>
+	<message-translator class="auto-convert-message-translator">
+	  <jms-output-type>Text</jms-output-type>
+    </message-translator>
+    <correlation-id-source class="null-correlation-id-source"/>
+    <receive-wait>
+      <unit>MILLISECONDS</unit>
+      <interval>30000</interval>
+    </receive-wait>
+    <max-transaction-time>
+      <unit>MILLISECONDS</unit>
+      <interval>100</interval>
+    </max-transaction-time>
+    <xa-resource-name>xa_wmq_consumer_resource</xa-resource-name>
+    <transaction-manager class="shared-transaction-manager">
+      <lookup-name>transaction-manager</lookup-name>
+    </transaction-manager>
+    <xa-exception-handler class="xa-wait-exception-handler">
+      <wait-period>
+        <unit>SECONDS</unit>
+        <interval>30</interval>
+      </wait-period>
+    </xa-exception-handler>
+    <recreate-consumer-on-error>true</recreate-consumer-on-error>
+    <global-lock>false</global-lock>
+    <endpoint wizard-key="wmqConsumeEndpoint" wizard-label="WebsphereMQ Consume Endpoint" wizard-desc="WebsphereMQ Consume Endpoint using RFC6167 format topic/queue (default jms:queue:DEV.QUEUE.1)" wizard-type="String" wizard-step="wmq-to-solace">jms:queue:DEV.QUEUE.1</endpoint>
+  </consumer>
+  <service-collection class="service-list">
+    <unique-id>nauseous-mestorf</unique-id>
+    <services/>
+  </service-collection>
+  <producer class="xa-jms-producer">
+    <unique-id>xa_solace_producer</unique-id>
+    <acknowledge-mode>0</acknowledge-mode>
+    <message-translator class="text-message-translator"/>
+    <delivery-mode>PERSISTENT</delivery-mode>
+    <session-factory class="jms-default-producer-xa-session"/>
+    <endpoint wizard-key="solaceProduceEndpoint" wizard-label="Solace Produce Endpoint" wizard-desc="Solace Produce Endpoint using RFC6167 format topic/queue (default jms:queue:Sample.Q2)" wizard-type="String" wizard-step="wmq-to-solace">jms:queue:Sample.Q2</endpoint>
+    <xa-resource-name>xa_solace_producer_resource</xa-resource-name>
+    <transaction-manager class="shared-transaction-manager">
+      <lookup-name>transaction-manager</lookup-name>
+    </transaction-manager>
+  </producer>
+  <send-events>false</send-events>
+  <produce-exception-handler class="null-produce-exception-handler"/>
+  <unique-id>xa_wmq_solace</unique-id>
+  <message-metrics-interceptor>
+    <unique-id>xa_wmq_solace-MessageMetrics</unique-id>
+    <timeslice-duration>
+      <unit>MINUTES</unit>
+      <interval>5</interval>
+    </timeslice-duration>
+    <timeslice-history-count>12</timeslice-history-count>
+  </message-metrics-interceptor>
+  <in-flight-workflow-interceptor>
+    <unique-id>xa_wmq_solace-InFlight</unique-id>
+  </in-flight-workflow-interceptor>
+  <comments><![CDATA[A standard workflow demonstrating XA trsnactions between WebsphereMQ and Solace.]]></comments>
+</standard-workflow>

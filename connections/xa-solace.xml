@@ -1,0 +1,25 @@
+<xa-jms-connection
+  tmpl-author="Adaptris" 
+  tmpl-class-name="com.adaptris.xa.jms.XAJmsConnection" 
+  tmpl-created="2021-04-22T10:00:00" 
+  tmpl-desc="XA Solace JMS Connection" 
+  tmpl-keywords="Solace XA JMS" 
+  tmpl-name="XA-Solace-JMS-Connection" 
+  tmpl-target-version="4.0.0-RELEASE" 
+  tmpl-title="XA Solace JMS Connection" 
+  tmpl-type="connection" tmpl-wizard="true"
+  wizard-solace-connection-order="0" wizard-solace-connection-desc="Solace Connection details"
+>
+  <xslt-wizard>
+    <!-- In absence of other way of doing it, we use the xslt-wizard tags to set the value of Generate unique identifier fields to false in the UI wizard -->
+    <xslt-template><![CDATA[<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"></xsl:stylesheet>]]></xslt-template>
+  </xslt-wizard>
+  <connection-error-handler class="xa-jms-connection-error-handler"/>
+  <unique-id>xa_solace</unique-id>
+  <user-name wizard-key="solaceUsername" wizard-label="Username" wizard-desc="Solace Username (default admin)" wizard-type="String" wizard-step="solace-connection">admin</user-name>
+  <password wizard-key="solacePassword" wizard-label="Password" wizard-desc="Solace Password (default admin)" wizard-type="Password" wizard-step="solace-connection">admin</password>
+  <vendor-implementation class="xa-basic-solace-implementation">
+    <broker-url wizard-key="solaceBrokerUrl" wizard-label="Broker URL" wizard-desc="Solace Broker URL (default tcp://localhost:55555)" wizard-type="String" wizard-step="solace-connection">tcp://localhost:55555</broker-url>
+    <message-vpn>default</message-vpn>
+  </vendor-implementation>
+</xa-jms-connection>
