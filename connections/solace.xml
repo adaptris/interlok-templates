@@ -8,6 +8,7 @@
   tmpl-target-version="4.0.0-RELEASE" 
   tmpl-title="Solace JMS Connection" 
   tmpl-type="connection" tmpl-wizard="true"
+  tmpl-optional-components="interlok-solace"
   wizard-solace-connection-order="0" wizard-solace-connection-desc="Solace Connection details"
 >
   <xslt-wizard>

@@ -8,6 +8,7 @@
   tmpl-target-version="4.0.0-RELEASE" 
   tmpl-title="JMS bridging between Solace and WebsphereMQ and vice versa" 
   tmpl-type="channel" tmpl-wizard="true"
+  tmpl-optional-components="interlok-solace,interlok-webspheremq"
   wizard-solace-connection-order="0" wizard-solace-connection-desc="Solace Connection details"
   wizard-wmp-connection-order="1" wizard-wmp-connection-desc="WebsphereMQ Connection details"
   wizard-solace-to-wmq-order="2" wizard-solace-to-wmq-desc="Solace to WebsphereMQ"

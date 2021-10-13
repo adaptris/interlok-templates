@@ -8,6 +8,7 @@
   tmpl-target-version="4.0.0-RELEASE" 
   tmpl-title="XA WebsphereMQ JMS Connection" 
   tmpl-type="connection" tmpl-wizard="true"
+  tmpl-optional-components="interlok-xa-wmq"
   wizard-wmp-connection-order="0" wizard-wmp-connection-desc="WebsphereMQ Connection details"
 >
   <xslt-wizard>

@@ -11,6 +11,7 @@
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Basic SonicMQ Connection Template" 
          tmpl-type="connection" tmpl-wizard="true"
+		 tmpl-optional-components="interlok-jms-sonicmq"
          wizard-init-order="0" wizard-init-desc="Configure the connection unique-id"
          wizard-brokerConnection-order="1" wizard-brokerConnection-desc="Configure the broker Connection"
          wizard-brokerCredentials-order="2" wizard-brokerCredentials-desc="Configure the broker Credentials"

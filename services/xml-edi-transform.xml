@@ -10,6 +10,7 @@
          tmpl-target-version="3.1.0-RELEASE" 
          tmpl-title="Transform XML to EDI Service Template"
          tmpl-type="service" tmpl-wizard="true"
+		 tmpl-optional-components="interlok-edistream"
          wizard-transform-order="0" wizard-transform-desc="Configure the Transform"
 >
 

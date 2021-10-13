@@ -8,6 +8,7 @@
   tmpl-target-version="4.0.0-RELEASE" 
   tmpl-title="JMS bridging between Solace and WebsphereMQ using XA" 
   tmpl-type="workflow" tmpl-wizard="true"
+  tmpl-optional-components="interlok-xa-solace,interlok-xa-wmq"
   wizard-solace-to-wmq-order="2" wizard-solace-to-wmq-desc="Solace to WebsphereMQ"
 >
   <xslt-wizard>
